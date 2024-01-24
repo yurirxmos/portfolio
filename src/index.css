@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../assets/fonts/Montserrat.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../assets/fonts/Inter.ttf') format('truetype');
+}
+
+:root {
+    --bg: #eeeeee;
+}
+
+body {
+    font-family: 'Montserrat';
+    background-color: var(--bg);
+    padding: 15px 100px;
+}
+
+b {
+    font-weight: 800;
+}
+
+html {
+    scroll-behavior: smooth;
+}

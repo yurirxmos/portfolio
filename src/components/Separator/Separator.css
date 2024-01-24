@@ -1,0 +1,9 @@
+.separator {
+    color: var(--primary);
+    font-weight: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+    letter-spacing: 3px;
+}
