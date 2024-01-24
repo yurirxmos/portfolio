@@ -127,8 +127,6 @@ const Home = () => {
             
             <Footer />
 
-
-
         </div>
     );
 };
