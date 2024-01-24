@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
+import Footer from "../../components/Footer/Footer";
 import Separator from "../../components/Separator/Separator";
 import job from "../../assets/imgs/bag.svg";
 import repos from "../../assets/imgs/repos.svg";
@@ -123,6 +124,8 @@ const Home = () => {
             </div>
 
             <Separator />
+            
+            <Footer />
 
 
 

@@ -41,12 +41,10 @@ const Navbar = () => {
       <div className="nav-buttons">
         <a href="#">
           <img src={us} />
-          eng version
         </a>
         |
         <a href="#">
           <img src={Moon} />
-          dark mode
         </a>
       </div>
     </nav>

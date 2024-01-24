@@ -27,11 +27,6 @@
     margin-right: 5px;
 }
 
-.brand a {
-    text-decoration: none;
-    color: #111111;
-}
-
 .nav-links {
     display: flex;
     align-items: center;
