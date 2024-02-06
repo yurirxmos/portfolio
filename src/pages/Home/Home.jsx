@@ -9,35 +9,26 @@ import contact from "../../assets/imgs/contact.svg";
 import wpp from "../../assets/imgs/wpp.svg";
 import linkedin from "../../assets/imgs/linkedin.svg";
 import gmail from "../../assets/imgs/gmail.svg";
+import profile from "../../assets/imgs/profile.png";
+import html from "../../assets/imgs/html.svg";
+import css from "../../assets/imgs/css.svg";
+import js from "../../assets/imgs/javascript.svg";
+import react from "../../assets/imgs/react.svg";
+import git from "../../assets/imgs/git.svg";
+import node from "../../assets/imgs/nodejs.svg";
+import firebase from "../../assets/imgs/firebase.svg";
+import project from "../../assets/imgs/project.svg";
+
 
 const Home = () => {
-    const [text, setText] = useState('');
     const [repositories, setRepositories] = useState([]);
 
     useEffect(() => {
-        const originalText = "Olá! Meu nome é Yuri, esse é o meu portfólio fique à vontade para explorar e me conhecer melhor!";
-        let index = 0;
-
-        const intervalId = setInterval(() => {
-            setText(originalText.substring(0, index));
-            index++;
-
-            if (index > originalText.length) {
-                clearInterval(intervalId);
-            }
-        }, 60);
-
         fetch('https://api.github.com/users/yurirxmos/repos')
             .then(response => response.json())
             .then(data => setRepositories(data))
             .catch(error => console.error('Erro ao buscar repositórios:', error));
-
-        return () => {
-            clearInterval(intervalId);
-        };
     }, []);
-
-
 
     return (
         <div className="main">
@@ -47,40 +38,92 @@ const Home = () => {
             <Separator />
 
             <div className="home-title">
-                <h1>{text}</h1>
+
+                <div>
+                    <div className="text">
+                        <h1><b>Olá</b>, bem vindo ao meu portfólio!</h1>
+                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um estudante entusiasmado de Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, desde o desenvolvimento de software até ao desenvolvimento de páginas web.</p>
+                    </div>
+
+                    <div className="skills">
+                        <h2>/ front-end</h2>
+                        <img src={html} alt="html" />
+                        <img src={css} alt="css" />
+                        <img src={js} alt="javascript" />
+                        <img src={react} alt="react" />
+                    </div>
+
+                    <div className="skills">
+                        <h2>/ back-end</h2>
+                        <img src={node} alt="node" />
+                        <img src={firebase} alt="firebase" />
+                    </div>
+
+                    <div className="skills">
+                        <h2>/ dev-ops</h2>
+                        <img src={git} alt="git" />
+                    </div>
+                </div>
+
+
+
+                <div>
+                    <img src={profile} alt="profilepic" />
+                </div>
+
+
             </div>
 
             <Separator />
 
             <div className="home-experience" id="home-experience">
                 <img src={job} />
-                <h1>EXPERIÊNCIA</h1>
-                <p>
-                    <h2>Desenvolvedor de front-end</h2>
-                    <h3>Freelancer</h3>
-                    <h3>abril de 2023 até o momento </h3> <br />
-                    <b>•</b> HTML, CSS e Bootstrap para o desenvolvimento de interfaces responsivas e atrativas ao usuário. <br />
-                    <b>•</b> JavaScript, React, React Router para criação dinâmica de websites. <br />
-                    <b>•</b> Git e GitHub para controle de versão, colaboração e organização de projetos. <br />
-                    <b>•</b> Boas práticas de desenvolvimento e metodologias ágeis. <br />
-                </p>
+                <h1>EXPERIÊNCIA PROFISSIONAL</h1>
 
-                <p>
-                    <h2>Desenvolvedor web</h2>
-                    <h3>Universidade Federal de Jataí</h3>
-                    <h3>fevereiro de 2023 até abril de 2023 </h3> <br />
-                    <b>•</b> Desenvolvimento de sites com low code (Google Sites, WordPress).  <br />
-                    <b>•</b> Experiência em integração de gráficos do Power BI via iframe para visualizações dinâmicas. <br />
-                </p>
 
-                <p>
-                    <h2>Assistente de TI</h2>
-                    <h3>Terram Soluções Agronômicas</h3>
-                    <h3>novembro de 2021 até janeiro de 2022 </h3> <br />
-                    <b>•</b> Automação de atividades com utilização de scripts em Python.  <br />
-                    <b>•</b> Manutenção do servidor utilizado via nuvem e localmente. <br />
-                    <b>•</b> Manutenção de equipamentos e dispositivos utilizados. <br />
-                </p>
+                <div className="exp-list">
+                    <div className="exp">
+                        <h1>
+                            <img src={job} />
+                            Desenvolvedor Front-End
+                        </h1>
+                        <h2>Freelancer</h2>
+                        <h2>abril de 2023 até o momento</h2>
+                        <p>• HTML, CSS e Bootstrap para o desenvolvimento de interfaces responsivas e atrativas ao usuário.</p>
+                        <p>• JavaScript, React, React Router para criação dinâmica de websites.</p>
+                    </div>
+
+                    <div className="exp">
+                        <h1>
+                            <img src={job} />
+                            Desenvolvedor Web
+                        </h1>
+                        <h2>Universidade Federal de Jataí</h2>
+                        <h2>fevereiro de 2023 até abril de 2023</h2>
+                        <p>• Desenvolvimento de sites com low code (Google Sites, WordPress).</p>
+                        <p>• Experiência em integração de gráficos do Power BI via iframe para visualizações dinâmicas.</p>
+                    </div>
+
+                    <div className="exp">
+                        <h1>
+                            <img src={job} />
+                            Assistente de TI
+                        </h1>
+                        <h2>Terram Soluções Agronômicas</h2>
+                        <h2>novembro de 2021 até janeiro de 2022</h2>
+                        <p>• Automação de atividades com utilização de scripts em Python.</p>
+                        <p>• Manutenção do servidor utilizado via nuvem e localmente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <Separator />
+
+            <div className="home-project" id="home-project">
+                <img src={project} alt="project" />
+                <h1>PROJETOS</h1>
+
+                <h2>SEÇÃO EM MANUTENÇÃO </h2>
             </div>
 
             <Separator />
@@ -110,12 +153,12 @@ const Home = () => {
                         <img src={wpp} />
                         WhatsApp
                     </a>
-                    |
+
                     <a href="https://www.linkedin.com/in/yurirxmos/" target="_blank">
                         <img src={linkedin} />
                         LinkedIn
                     </a>
-                    |
+
                     <a href="mailto:yuriramos2406@gmail.com" target="_blank">
                         <img src={gmail} />
                         Gmail
@@ -124,7 +167,7 @@ const Home = () => {
             </div>
 
             <Separator />
-            
+
             <Footer />
 
         </div>

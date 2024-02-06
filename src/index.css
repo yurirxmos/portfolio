@@ -9,13 +9,26 @@
 }
 
 :root {
-    --bg: #eeeeee;
+    --bg: #222222;
+    --primary: #eeeeee;
+    --bluestandard: #197dff;
 }
 
 body {
+    color: var(--primary);
     font-family: 'Montserrat';
-    background-color: var(--bg);
-    padding: 15px 100px;
+    background-image: url(../src/assets/imgs/bg-repeat.png);
+    padding: 15px 200px;
+    animation: moveBackground 120s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
 }
 
 b {
@@ -24,6 +37,10 @@ b {
 
 html {
     scroll-behavior: smooth;
+}
+
+h1 {
+    font-weight: 800;
 }
 
 @media only screen and (max-width: 768px) {

@@ -12,37 +12,124 @@
 
 .home-title {
     display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 2rem 0;
-    gap: 10px;
+    align-items: top;
+    justify-content: center;
+    flex-direction: row;
+    margin: 10rem 0;
+    gap: 10vh;
 }
 
 .home-title img {
-    width: 20px;
+    border-radius: 20px;
+    width: 50vh;
 }
 
 .home-title h1 {
-    font-family: 'Montserrat';
     font-weight: 600;
     letter-spacing: 0px;
-    font-size: 15px;
-    color: #333;
-    width: 50%;
-    line-height: 22px;
-    text-align: center;
+    font-size: 25px;
+    line-height: 25px;
 }
 
-.home-title a {
-    padding: 12px;
+.home-title h2 {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 25px;
 }
 
-.home-title a:hover {
+.home-title .text {
+    line-height: 25px;
+    text-align: left;
+    background-color: #333;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 0;
+}
+
+.home-title .text p {
+    opacity: 70%;
+    line-height: 35px;
+    margin-top: 10px;
+}
+
+.skills {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+    gap: 5px;
+}
+
+.skills img {
+    width: 40px;
+    border-radius: 0;
+}
+
+.skills img:hover {
     transition: 600ms;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    cursor: pointer;
+}
+
+
+.home-experience {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5rem;
+    gap: 15px;
+}
+
+.home-experience img {
+    width: 15px;
     filter: invert(1);
 }
 
-.home-experience {
+.home-experience h2 {
+    opacity: 60%;
+    font-size: 12px;
+}
+
+.home-experience p {
+    align-self: flex-start;
+    margin-top: 1rem;
+    font-size: 13px;
+}
+
+.exp-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.exp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    line-height: 20px;
+    background-color: #2e2e2e;
+    width: 28%;
+    min-height: 180px;
+}
+
+.exp:hover {
+    cursor: pointer;
+    transition: 800ms;
+    background-color: #222222;
+    border-bottom: solid 5px var(--bluestandard);
+}
+
+.exp img {
+    vertical-align: middle;
+    margin-right: 5px;
+    margin-bottom: 2px;
+}
+
+.home-project {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,31 +139,9 @@
     gap: 15px;
 }
 
-.home-experience img {
+.home-project img {
+    filter: invert(1);
     width: 15px;
-}
-
-.home-experience p {
-    width: 60%;
-    text-align: justify;
-    padding-left: 1rem;
-    line-height: 3vh;
-    border-left: solid 3px black;
-    margin: 20px 0;
-}
-
-.home-experience p:hover {
-    border-left: solid 3px rgb(25, 125, 255);
-    transition: 800ms;
-    cursor: pointer;
-}
-
-.home-experience h2 {
-    font-weight: 800;
-}
-
-.home-experience h3 {
-    font-size: 14px;
 }
 
 .home-repos {
@@ -90,6 +155,7 @@
 }
 
 .home-repos img {
+    filter: invert(1);
     width: 15px;
 }
 
@@ -104,7 +170,7 @@
     width: 11px;
     vertical-align: middle;
     margin-right: 5px;
-    filter: invert(1);
+    filter: brightness(1);
 }
 
 .repo-list p {
@@ -115,16 +181,15 @@
 .repo-item {
     width: 25%;
     padding: 1rem;
-    background-color: #2c2c2c;
-    color: #eee;
+    background-color: var(--primary);
+    color: #2e2e2e;
     border-radius: 20px;
     text-decoration: none;
     margin-bottom: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .repo-item:hover {
-    opacity: 80%;
+    opacity: 60%;
     transition: 600ms;
 }
 
@@ -143,25 +208,25 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
-    gap: 50px;
+    gap: 30px;
 }
 
 .home-contact img {
+    filter: invert(1);
     width: 15px;
-
 }
 
 .home-contact a {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
+    background-color: #2e2e2e;
+    color: var(--primary);
     text-decoration: none;
     font-size: 13px;
     min-width: 120px;
     padding: 10px;
     border-radius: 15px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
 }
 
@@ -181,12 +246,12 @@
         flex-direction: column;
         align-items: center;
     }
-    
+
     .repo-item {
         width: 80%;
     }
 
-    .home-contact div{
+    .home-contact div {
         gap: 5px;
         flex-direction: column;
     }

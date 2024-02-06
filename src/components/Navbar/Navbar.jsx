@@ -4,49 +4,56 @@ import Moon from "../../assets/imgs/moon.svg";
 import us from "../../assets/imgs/us.svg";
 import home from "../../assets/imgs/home.svg";
 import job from "../../assets/imgs/bag.svg";
-import github from "../../assets/imgs/github.svg";
+import projects from "../../assets/imgs/project.svg";
 import repos from "../../assets/imgs/repos.svg";
 import contact from "../../assets/imgs/contact.svg";
+import cv from "../../assets/imgs/download.svg";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <a className="brand" href="https://github.com/yurirxmos" target="_blank">
-        <img src={github} />
-        yurirxmos dev.
-      </a>
 
       <div className="nav-links">
 
         <a href="/">
           <img src={home} />
-          início
+          <span>início</span>
         </a>
 
         <a href="#home-experience">
           <img src={job} />
-          experiência
+          <span>experiência</span>
+        </a>
+
+        <a href="#home-project">
+          <img src={projects} />
+          <span>projetos</span>
         </a>
 
         <a href="#home-repos">
           <img src={repos} />
-          repositórios
+          <span>repositórios</span>
         </a>
+
         <a href="#home-contact">
-        <img src={contact} />
-          contato
-          </a>
+          <img src={contact} />
+          <span>contato</span>
+        </a>
+
+        <a href="#home-cv">
+          <img src={cv} />
+          <span>download cv</span>
+        </a>
       </div>
 
+      {/*
       <div className="nav-buttons">
         <a href="#">
+          US VERSION
           <img src={us} />
         </a>
-        |
-        <a href="#">
-          <img src={Moon} />
-        </a>
       </div>
+      */}
     </nav>
   );
 };

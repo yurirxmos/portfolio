@@ -1,35 +1,16 @@
 .navbar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
     display: flex;
     align-items: center;
     padding: 10px;
-    flex-direction: row;
-}
-
-.brand {
-    color: #333;
-    font-weight: bold;
-    font-size: 15px;
-    margin-right: auto;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-.brand:hover {
-    color: rgba(71, 134, 228, 0.856);
-    cursor: pointer;
-    transition: 600ms;
-}
-
-.brand img {
-    width: 15px;
-    margin-right: 5px;
 }
 
 .nav-links {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
     text-transform: uppercase;
     font-size: 11px;
@@ -41,21 +22,33 @@
     text-decoration: none;
     display: flex;
     align-items: center;
-    color: #333;
+    justify-content: left;
+    color: var(--primary);
     padding: 10px;
+
     border-radius: 10px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .nav-links a:hover {
     transition: 600ms;
-    background-color: #c9c9c9;
     border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.082) 0%, rgba(0,0,0,0) 100%);
 }
 
 .nav-links img {
-    width: 12px;
-    margin-right: 6px;
+    filter: invert(1);
+    width: 22px;
+    height: 22px;
+}
+
+.nav-links span {
+    font-size: 12px;
+    display: none; 
+    margin-left: 15px; 
+}
+
+.nav-links a:hover span {
+    display: inline; 
 }
 
 .nav-buttons {
@@ -65,7 +58,7 @@
     position: fixed;
     gap: 5px;
     align-items: center;
-    background-color: #c9c9c9;
+    background-color: var(--primary);
     padding: 5px;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -78,7 +71,8 @@
     text-decoration: none;
     color: #111111;
     padding: 10px;
-    font-size: 12px;
+    font-size: 9px;
+    font-weight: 500;
 }
 
 .nav-buttons img {
@@ -87,10 +81,8 @@
 
 .nav-buttons a:hover {
     transition: 600ms;
-    background-color: #eee;
-    border-radius: 10px;
+    opacity: 70%;
 }
-
 
 @media only screen and (max-width: 768px) {
     .brand {

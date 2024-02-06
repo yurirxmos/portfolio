@@ -4,7 +4,7 @@ import "./Separator.css";
 const Separator = () => {
     return (
         <p className="separator">
-            ...
+            . . .
         </p>
     );
 };
