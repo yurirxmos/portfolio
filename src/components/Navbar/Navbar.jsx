@@ -1,7 +1,6 @@
 import React from "react";
+import { saveAs } from "file-saver";
 import "./Navbar.css";
-import Moon from "../../assets/imgs/moon.svg";
-import us from "../../assets/imgs/us.svg";
 import home from "../../assets/imgs/home.svg";
 import job from "../../assets/imgs/bag.svg";
 import projects from "../../assets/imgs/project.svg";
@@ -10,6 +9,12 @@ import contact from "../../assets/imgs/contact.svg";
 import cv from "../../assets/imgs/download.svg";
 
 const Navbar = () => {
+
+  const handleDownloadCV = () => {
+    const arquivoUrl = 'src/assets/pdf/cv.pdf';
+    saveAs(arquivoUrl, 'cv_yuriramos.pdf');
+  };
+
   return (
     <nav className="navbar">
 
@@ -40,7 +45,7 @@ const Navbar = () => {
           <span>contato</span>
         </a>
 
-        <a href="#home-cv">
+        <a href="#" onClick={handleDownloadCV} download="cv_yuriramos.pdf">
           <img src={cv} />
           <span>download cv</span>
         </a>

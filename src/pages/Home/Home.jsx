@@ -18,6 +18,7 @@ import git from "../../assets/imgs/git.svg";
 import node from "../../assets/imgs/nodejs.svg";
 import firebase from "../../assets/imgs/firebase.svg";
 import project from "../../assets/imgs/project.svg";
+import githubcardgif from "../../assets/imgs/githubcardgif.gif";
 
 
 const Home = () => {
@@ -123,7 +124,17 @@ const Home = () => {
                 <img src={project} alt="project" />
                 <h1>PROJETOS</h1>
 
-                <h2>SEÇÃO EM MANUTENÇÃO </h2>
+                <div className="project-list">
+                    <div>
+                        <div className="project">
+                            <img src={githubcardgif} />
+                            <h2>GitHub Card</h2>
+                            <p>Um card que traz as informações da API do Github por meio do nome de usuário.</p>
+
+                        </div>
+                        <a href="https://yurirxmos.github.io/github-card/" target="_blank">testar projeto</a>
+                    </div>
+                </div>
             </div>
 
             <Separator />
