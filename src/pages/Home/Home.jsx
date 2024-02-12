@@ -20,6 +20,7 @@ import firebase from "../../assets/imgs/firebase.svg";
 import project from "../../assets/imgs/project.svg";
 import githubcardgif from "../../assets/imgs/githubcardgif.gif";
 import caplolgif from "../../assets/imgs/caplolgif.gif";
+import clock from "../../assets/imgs/clock.png";
 
 
 const Home = () => {
@@ -130,11 +131,24 @@ const Home = () => {
                         <div className="project">
                             <img src={githubcardgif} />
                             <h2>GitHub Card</h2>
-                            <p>Um card que carrega as informações da API do Github por meio do nome de usuário.</p>
-                            <div className="project-skills">
-                                <img src={html} />
-                                <img src={css} />
-                                <img src={js} />
+                            <p>Um card que mostra as informações do perfil do Github atráves da inserção do nome de usuário.</p>
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={html} />
+                                    <p>html</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id='javascript'>js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>1 dia.</p>
+                                </div>
                             </div>
                         </div>
                         <a href="https://yurirxmos.github.io/github-card/" target="_blank">ver projeto</a>
@@ -145,10 +159,23 @@ const Home = () => {
                             <img src={caplolgif} />
                             <h2>CAPLOL</h2>
                             <p>Um site multiabas pra visualizar informações de um campeonato, assim como tabela, jogos e transmissão.</p>
-                            <div className="project-skills">
-                                <img src={html} />
-                                <img src={css} />
-                                <img src={js} />
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={html} />
+                                    <p>html</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id='javascript'>js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>1 mês.</p>
+                                </div>
                             </div>
                         </div>
                         <a href="https://caplol-site.vercel.app/" target="_blank">ver projeto</a>

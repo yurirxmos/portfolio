@@ -186,21 +186,67 @@
     transition: 600ms;
 }
 
-.project-skills {
-    margin-top: 10px;
+.project-info {
+    margin-top: 1rem;
     display: flex;
-    align-items: left;
-    justify-content: left;
+    align-items: center;
     flex-direction: row;
-    gap: 3px;
-    font-weight: 800;
+    justify-content: space-between;
+    gap: 7px;
+    background-color: var(--secondary);
+    border-radius: 5px;
+    padding: 8px;
+    position: relative;
 }
 
-.project-skills img {
+.project-info p {
+    opacity: 100%;
+    font-size: 11px;
+}
+
+.project-info img {
     border-radius: 0;
     width: 25px;
 }
 
+.project-skills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 5px;
+}
+
+.project-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: auto;
+
+    padding: 5px 6px;
+    width: 40px;
+    
+    background-color: var(--bg);
+    border-radius: 5px;
+}
+
+.project-time:hover {
+    cursor: help;
+    transition: 600ms;
+}
+
+.project-time:hover::after {
+    content: "Tempo gasto (aproximadamente) no projeto.";
+    font-size: 11px;
+    position: absolute;
+    background-color: var(--bg);
+    padding: 5px 10px;
+    border-radius: 5px;
+    bottom: 105%; 
+    white-space: nowrap;
+    z-index: 999999;
+}
 
 .home-repos {
     display: flex;
