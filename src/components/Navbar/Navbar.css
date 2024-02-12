@@ -32,7 +32,7 @@
 .nav-links a:hover {
     transition: 600ms;
     border-radius: 10px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.082) 0%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.082) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .nav-links img {
@@ -43,12 +43,12 @@
 
 .nav-links span {
     font-size: 12px;
-    display: none; 
-    margin-left: 15px; 
+    display: none;
+    margin-left: 15px;
 }
 
 .nav-links a:hover span {
-    display: inline; 
+    display: inline;
 }
 
 .nav-buttons {
@@ -85,17 +85,23 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .brand {
-        margin-right: 0;
-    }
-
     .navbar {
-        flex-direction: column;
+        position: inherit;
+        align-items: start;
     }
 
     .nav-links {
+        display: flex;
+        flex-direction: row;
         justify-content: center;
         align-items: center;
+        gap: 10px;
         flex-wrap: wrap;
+    }
+
+    .nav-links span {
+        font-size: 12px;
+        display: inline;
+        margin-left: 15px;
     }
 }

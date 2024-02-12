@@ -1,27 +1,14 @@
-.home-picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.home-picture img {
-    width: 250px;
-    border-radius: 100%;
-}
-
-
 .home-title {
     display: flex;
-    align-items: top;
     justify-content: center;
     flex-direction: row;
     margin: 10rem 0;
-    gap: 10vh;
+    gap: 6vh;
 }
 
 .home-title img {
     border-radius: 20px;
-    width: 50vh;
+    width: 300px;
 }
 
 .home-title h1 {
@@ -66,9 +53,9 @@
 }
 
 .skills img:hover {
-    transition: 600ms;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     cursor: pointer;
+    transform: scale(1.1);
+    transition: 600ms;
 }
 
 
@@ -118,9 +105,9 @@
 
 .exp:hover {
     cursor: pointer;
-    transition: 800ms;
-    background-color: #222222;
-    border-bottom: solid 5px var(--bluestandard);
+    filter: invert(1);
+    transform: scale(1.1);
+    transition: 600ms;
 }
 
 .exp img {
@@ -145,9 +132,9 @@
 }
 
 .project-list {
-    display: flex; /* modo de organização (flex, block, none, inline-block, inline) */
-    align-items: center; /* é do display flex, alinha no centro os itens */
-    justify-content: center; /* é do display flex, alinha verticalmente os itens */
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
     flex-direction: row;
     text-align: center;
     line-height: 24px;
@@ -160,7 +147,8 @@
     padding: 20px;
     border-radius: 10px;
     width: fit-content;
-    max-width: 500px;
+    max-width: 300px;
+    min-height: 280px;
     margin-bottom: 1rem;
 }
 
@@ -169,6 +157,7 @@
 }
 
 .project p {
+    text-align: left;
     opacity: 70%;
     font-size: 15px;
 }
@@ -192,9 +181,26 @@
 }
 
 .project-list div a:hover {
-    opacity: 70%;
-    transition: 300ms;
+    cursor: pointer;
+    filter: invert(1);
+    transition: 600ms;
 }
+
+.project-skills {
+    margin-top: 10px;
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-direction: row;
+    gap: 3px;
+    font-weight: 800;
+}
+
+.project-skills img {
+    border-radius: 0;
+    width: 25px;
+}
+
 
 .home-repos {
     display: flex;
@@ -241,7 +247,9 @@
 }
 
 .repo-item:hover {
-    opacity: 60%;
+    cursor: pointer;
+    filter: invert(1);
+    transform: scale(1.1);
     transition: 600ms;
 }
 
@@ -283,8 +291,10 @@
 }
 
 .home-contact a:hover {
-    background-color: #c9c9c9;
-    border-radius: 10px;
+    cursor: pointer;
+    background-color: var(--primary);
+    color: var(--bg);
+    transform: scale(1.1);
     transition: 600ms;
 }
 
@@ -294,18 +304,41 @@
 
 
 @media only screen and (max-width: 768px) {
-    .repo-list {
-        flex-direction: column;
+    
+    .home-title {
+        flex-direction: column-reverse;
+        justify-content: center;
         align-items: center;
+        gap: 2vh;
+        margin: 0rem 1.5rem;
+    }
+
+    .home-title h1 {
+        text-align: center;
+    }
+
+    .home-title p {
+        text-align: justify;
+    }
+
+    .exp-list {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .exp {
+        width: auto;
+        margin: 0rem 1.5rem;
     }
 
     .repo-item {
-        width: 80%;
+        width: auto;
+        margin: 0rem 1.5rem;
     }
 
     .home-contact div {
-        gap: 5px;
         flex-direction: column;
+        gap: 2vh;
     }
 
 }

@@ -19,6 +19,7 @@ import node from "../../assets/imgs/nodejs.svg";
 import firebase from "../../assets/imgs/firebase.svg";
 import project from "../../assets/imgs/project.svg";
 import githubcardgif from "../../assets/imgs/githubcardgif.gif";
+import caplolgif from "../../assets/imgs/caplolgif.gif";
 
 
 const Home = () => {
@@ -129,10 +130,28 @@ const Home = () => {
                         <div className="project">
                             <img src={githubcardgif} />
                             <h2>GitHub Card</h2>
-                            <p>Um card que traz as informações da API do Github por meio do nome de usuário.</p>
-
+                            <p>Um card que carrega as informações da API do Github por meio do nome de usuário.</p>
+                            <div className="project-skills">
+                                <img src={html} />
+                                <img src={css} />
+                                <img src={js} />
+                            </div>
                         </div>
-                        <a href="https://yurirxmos.github.io/github-card/" target="_blank">testar projeto</a>
+                        <a href="https://yurirxmos.github.io/github-card/" target="_blank">ver projeto</a>
+                    </div>
+
+                    <div>
+                        <div className="project">
+                            <img src={caplolgif} />
+                            <h2>CAPLOL</h2>
+                            <p>Um site multiabas pra visualizar informações de um campeonato, assim como tabela, jogos e transmissão.</p>
+                            <div className="project-skills">
+                                <img src={html} />
+                                <img src={css} />
+                                <img src={js} />
+                            </div>
+                        </div>
+                        <a href="https://caplol-site.vercel.app/" target="_blank">ver projeto</a>
                     </div>
                 </div>
             </div>
