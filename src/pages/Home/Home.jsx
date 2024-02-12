@@ -45,7 +45,7 @@ const Home = () => {
                 <div>
                     <div className="text">
                         <h1><b>Olá</b>, bem vindo ao meu portfólio!</h1>
-                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um estudante entusiasmado de Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, desde o desenvolvimento de software até ao desenvolvimento de páginas web.</p>
+                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um estudante entusiasmado de Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao desenvolvimento de software.</p>
                     </div>
 
                     <div className="skills">
