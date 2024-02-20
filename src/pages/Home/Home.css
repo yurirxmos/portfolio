@@ -9,6 +9,7 @@
     cursor: pointer;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.37) 0px 7px 29px 0px;
+    z-index: 99999;
 }
 
 .addons img {
@@ -20,6 +21,11 @@
 .addons:hover {
     filter: invert(1);
     transition: 600ms;
+}
+
+.addons:active {
+    filter: none;
+    background-color: var(--blue);
 }
 
 .home-title {
@@ -139,6 +145,7 @@
     transition: 600ms;
 }
 
+
 .exp img {
     vertical-align: middle;
     margin-right: 5px;
@@ -216,6 +223,7 @@
     filter: invert(1);
     transition: 600ms;
 }
+
 
 .project-info {
     margin-top: 1rem;

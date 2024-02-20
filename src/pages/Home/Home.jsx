@@ -30,7 +30,7 @@ const Home = () => {
     const [repositories, setRepositories] = useState([]);
     const [typedText, setTypedText] = useState('');
     const text = "Olá, seja bem vindo ao meu portfólio!";
-    const [buttonImage, setButtonImage] = useState(moon);
+    const [buttonImage, setButtonImage] = useState(sun);
     const [isWhiteMode, setIsWhiteMode] = useState(false);
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const Home = () => {
 
     const handleToggleMode = () => {
         setIsWhiteMode(!isWhiteMode);
-        setButtonImage(isWhiteMode ? moon : sun); 
+        setButtonImage(isWhiteMode ? sun : moon); 
     };
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Home = () => {
         <div className={`main ${isWhiteMode ? 'white-mode' : ''}`}>
 
             <button type="button" onClick={handleToggleMode} className="addons">
-                <img src={buttonImage} alt={isWhiteMode ? "White Mode" : "Dark Mode"} />
+                <img src={buttonImage} />
             </button>
 
             <Navbar />

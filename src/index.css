@@ -64,3 +64,19 @@ h1 {
         padding: 0 0;
     }
 }
+
+::-webkit-scrollbar {
+    width: 8px; 
+    background: var(--bg); 
+}
+
+::-webkit-scrollbar-track {
+    width: 10px;
+    background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary); 
+    border-radius: 10px; 
+    margin: 1rem;
+}
