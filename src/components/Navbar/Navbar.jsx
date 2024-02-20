@@ -7,6 +7,7 @@ import projects from "../../assets/imgs/project.svg";
 import repos from "../../assets/imgs/repos.svg";
 import contact from "../../assets/imgs/contact.svg";
 import cv from "../../assets/imgs/download.svg";
+import moon from "../../assets/imgs/moon.svg";
 
 const Navbar = () => {
 
@@ -49,16 +50,8 @@ const Navbar = () => {
           <img src={cv} />
           <span>download cv</span>
         </a>
+        
       </div>
-
-      {/*
-      <div className="nav-buttons">
-        <a href="#">
-          US VERSION
-          <img src={us} />
-        </a>
-      </div>
-      */}
     </nav>
   );
 };

@@ -1,14 +1,40 @@
+.addons {
+    border: none;
+    display: flex;
+    bottom: 15px;
+    right: 15px;
+    position: fixed;
+    background-color: var(--bg);
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: rgba(100, 100, 111, 0.37) 0px 7px 29px 0px;
+}
+
+.addons img {
+    filter: invert(1);
+    background-color: transparent;
+    width: 18px;
+}
+
+.addons:hover {
+    filter: invert(1);
+    transition: 600ms;
+}
+
 .home-title {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 10rem 0;
+    margin: 4rem 0;
     gap: 6vh;
 }
 
 .home-title img {
     border-radius: 20px;
     width: 300px;
+    animation: scale 2s ease-in-out forwards;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .home-title h1 {
@@ -32,6 +58,13 @@
     border-radius: 10px;
     padding: 2rem;
     margin: 0;
+    animation: scale 2s ease-in-out forwards;
+}
+
+.home-title .text:hover {
+    cursor: help;
+    filter: invert(1);
+    transition: 600ms;
 }
 
 .home-title .text p {
@@ -50,14 +83,9 @@
 .skills img {
     width: 40px;
     border-radius: 0;
+    animation: scale 2s ease-in-out forwards;
+    box-shadow: none;
 }
-
-.skills img:hover {
-    cursor: pointer;
-    transform: scale(1.1);
-    transition: 600ms;
-}
-
 
 .home-experience {
     display: flex;
@@ -101,6 +129,7 @@
     background-color: #2e2e2e;
     width: 28%;
     min-height: 180px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .exp:hover {
@@ -150,6 +179,7 @@
     max-width: 300px;
     min-height: 280px;
     margin-bottom: 1rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .project h2 {
@@ -178,6 +208,7 @@
     text-decoration: none;
     font-weight: 800;
     color: var(--bg);
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .project-list div a:hover {
@@ -196,6 +227,7 @@
     background-color: var(--secondary);
     border-radius: 5px;
     padding: 8px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     position: relative;
 }
 
@@ -226,7 +258,7 @@
 
     padding: 5px 6px;
     width: 40px;
-    
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     background-color: var(--bg);
     border-radius: 5px;
 }
@@ -244,8 +276,10 @@
     padding: 5px 10px;
     border-radius: 5px;
     bottom: 105%; 
-    white-space: nowrap;
+    white-space: wrap;
+    line-height: normal;
     z-index: 999999;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .home-repos {
@@ -290,6 +324,7 @@
     border-radius: 20px;
     text-decoration: none;
     margin-bottom: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .repo-item:hover {
@@ -334,12 +369,12 @@
     padding: 10px;
     border-radius: 15px;
     cursor: pointer;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .home-contact a:hover {
     cursor: pointer;
-    background-color: var(--primary);
-    color: var(--bg);
+    filter: invert(1);
     transform: scale(1.1);
     transition: 600ms;
 }

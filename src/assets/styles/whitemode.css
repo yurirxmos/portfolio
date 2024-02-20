@@ -1,0 +1,52 @@
+body.white-mode {
+    background-image: url(../../assets/imgs/white-bg-repeat.png);
+    background-color: var(--primary);
+}
+
+.white-mode .footer,
+.white-mode .separator,
+.white-mode .brand,
+.white-mode .skills {
+    color: var(--bg);
+}
+
+.white-mode .home-title .text,
+.white-mode .navbar,
+.white-mode .exp,
+.white-mode .home-contact a,
+.white-mode .project,
+.white-mode .project-info,
+.white-mode .project-time {
+    background-color: var(--primary);
+    color: var(--bg);
+}
+
+.white-mode h1,
+.white-mode .navbar span {
+    color: var(--bg);
+}
+
+.white-mode img {
+    filter: none;
+}
+
+.white-mode .navbar img,
+.white-mode .brand img {
+    filter: none;
+}
+
+.white-mode .repo-item,
+.white-mode .project-list div a{
+    background-color: var(--bg);
+    color: var(--primary);
+}
+
+.white-mode .project-time img,
+.addons img {
+    filter: invert(1);
+}
+
+.project-time:hover::after {
+    color: var(--bg);
+    background-color: var(--primary);
+}

@@ -10,9 +10,12 @@
 
 :root {
     --bg: #222222;
+    
     --primary: #eeeeee;
     --secondary: #111111;
-    --bluestandard: #197dff;
+
+    --gray: #dadada;
+    --blue: #197dff;
 }
 
 body {
@@ -21,6 +24,8 @@ body {
     background-image: url(../src/assets/imgs/bg-repeat.png);
     padding: 15px 200px;
     animation: moveBackground 120s linear infinite;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    opacity: 1;
 }
 
 @keyframes moveBackground {
@@ -29,6 +34,26 @@ body {
     }
     100% {
         background-position: 100% 100%;
+    }
+}
+
+@keyframes scale {
+    from {
+        opacity: 0;
+        transform: translateY(0) scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 

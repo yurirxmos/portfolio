@@ -1,0 +1,11 @@
+.brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.brand img {
+    filter: invert(1);
+    width: 70px;
+    animation: scale 2s ease-in-out
+}

@@ -3,9 +3,11 @@
     top: 0;
     bottom: 0;
     left: 0;
+    height: 100%;
     display: flex;
     align-items: center;
     padding: 10px;
+    background-color: var(--bg);
 }
 
 .nav-links {
@@ -32,7 +34,6 @@
 .nav-links a:hover {
     transition: 600ms;
     border-radius: 10px;
-    background: linear-gradient(90deg, rgba(255, 255, 255, 0.082) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
 .nav-links img {
@@ -49,39 +50,6 @@
 
 .nav-links a:hover span {
     display: inline;
-}
-
-.nav-buttons {
-    display: flex;
-    bottom: 15px;
-    right: 15px;
-    position: fixed;
-    gap: 5px;
-    align-items: center;
-    background-color: var(--primary);
-    padding: 5px;
-    border-radius: 8px;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-}
-
-.nav-buttons a {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    text-decoration: none;
-    color: #111111;
-    padding: 10px;
-    font-size: 9px;
-    font-weight: 500;
-}
-
-.nav-buttons img {
-    width: 15px;
-}
-
-.nav-buttons a:hover {
-    transition: 600ms;
-    opacity: 70%;
 }
 
 @media only screen and (max-width: 768px) {

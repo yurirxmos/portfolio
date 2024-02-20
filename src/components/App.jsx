@@ -2,6 +2,7 @@ import React from "react";
 import Home from "../pages/Home/Home";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import "./App.css";
+import "../assets/styles/whitemode.css";
 import "../assets/styles/reset.css";
 
 

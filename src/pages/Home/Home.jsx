@@ -3,6 +3,7 @@ import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Separator from "../../components/Separator/Separator";
+import Brand from "../../components/Brand/Brand";
 import job from "../../assets/imgs/bag.svg";
 import repos from "../../assets/imgs/repos.svg";
 import contact from "../../assets/imgs/contact.svg";
@@ -21,10 +22,16 @@ import project from "../../assets/imgs/project.svg";
 import githubcardgif from "../../assets/imgs/githubcardgif.gif";
 import caplolgif from "../../assets/imgs/caplolgif.gif";
 import clock from "../../assets/imgs/clock.png";
+import moon from "../../assets/imgs/moon.svg";
+import sun from "../../assets/imgs/sun.svg";
 
 
 const Home = () => {
     const [repositories, setRepositories] = useState([]);
+    const [typedText, setTypedText] = useState('');
+    const text = "Olá, seja bem vindo ao meu portfólio!";
+    const [buttonImage, setButtonImage] = useState(moon);
+    const [isWhiteMode, setIsWhiteMode] = useState(false);
 
     useEffect(() => {
         fetch('https://api.github.com/users/yurirxmos/repos')
@@ -33,18 +40,54 @@ const Home = () => {
             .catch(error => console.error('Erro ao buscar repositórios:', error));
     }, []);
 
+    useEffect(() => {
+        let currentIndex = 0;
+        const interval = setInterval(() => {
+            if (currentIndex <= text.length) {
+                setTypedText(text.slice(0, currentIndex));
+                currentIndex++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 100);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const handleToggleMode = () => {
+        setIsWhiteMode(!isWhiteMode);
+        setButtonImage(isWhiteMode ? moon : sun); 
+    };
+
+    useEffect(() => {
+        if (isWhiteMode) {
+            document.body.classList.add('white-mode');
+        } else {
+            document.body.classList.remove('white-mode');
+        }
+    }, [isWhiteMode]);
+
     return (
-        <div className="main">
+        <div className={`main ${isWhiteMode ? 'white-mode' : ''}`}>
+
+            <button type="button" onClick={handleToggleMode} className="addons">
+                <img src={buttonImage} alt={isWhiteMode ? "White Mode" : "Dark Mode"} />
+            </button>
 
             <Navbar />
 
             <Separator />
 
+            <Brand />
+
+            <Separator />
+
             <div className="home-title">
+
 
                 <div>
                     <div className="text">
-                        <h1><b>Olá</b>, bem vindo ao meu portfólio!</h1>
+                        <h1>{typedText}</h1>
                         <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um estudante entusiasmado de Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao desenvolvimento de software.</p>
                     </div>
 
