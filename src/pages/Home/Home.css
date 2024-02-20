@@ -128,7 +128,7 @@
     line-height: 20px;
     background-color: #2e2e2e;
     width: 28%;
-    min-height: 180px;
+    min-height: 240px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
@@ -177,7 +177,7 @@
     border-radius: 10px;
     width: fit-content;
     max-width: 300px;
-    min-height: 280px;
+    min-height: 400px;
     margin-bottom: 1rem;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
