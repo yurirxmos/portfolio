@@ -7,12 +7,11 @@ import projects from "../../assets/imgs/project.svg";
 import repos from "../../assets/imgs/repos.svg";
 import contact from "../../assets/imgs/contact.svg";
 import cv from "../../assets/imgs/download.svg";
-import moon from "../../assets/imgs/moon.svg";
 
 const Navbar = () => {
 
   const handleDownloadCV = () => {
-    const arquivoUrl = 'src/assets/pdf/cv.pdf';
+    const arquivoUrl = 'https://uce0c25e07c6ba74c4bb3b992df9.dl.dropboxusercontent.com/cd/0/get/CNoimYSSRoYA9KLjoL4iW1CC5l21HxCG1MxJSK0XAtgMkSEtQxEtr8I-5ShYgla-z2ch6mtRMLdVRVadpS3KT3octZFYhiob94ak_tHR1v_8x6jJuW3Q9DP4l7Xe_cJWyuYSAU2d5GG73xBNO5_g_FGQaPYZWFJcjoLcEuU_8gxazQ/file#';
     saveAs(arquivoUrl, 'cv_yuriramos.pdf');
   };
 
