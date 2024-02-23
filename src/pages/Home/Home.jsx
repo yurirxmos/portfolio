@@ -24,6 +24,7 @@ import caplolgif from "../../assets/imgs/caplolgif.gif";
 import clock from "../../assets/imgs/clock.png";
 import moon from "../../assets/imgs/moon.svg";
 import sun from "../../assets/imgs/sun.svg";
+import forgetgif from "../../assets/imgs/4getgif.gif";
 
 
 const Home = () => {
@@ -223,6 +224,34 @@ const Home = () => {
                         </div>
                         <a href="https://caplol-site.vercel.app/" target="_blank">ver projeto</a>
                     </div>
+
+                    <div>
+                        <div className="project">
+                            <img src={forgetgif} />
+                            <h2>/4get List</h2>
+                            <p>Uma to-do list simples em que as tasks são armazenadas em local storage.</p>
+                            <div className="project-info">
+                            <div className="project-skills">
+                                    <img src={react} />
+                                    <p>react</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id='javascript'>js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>1 dia.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://4get-list.vercel.app/" target="_blank">ver projeto</a>
+                    </div>
+
                 </div>
             </div>
 
