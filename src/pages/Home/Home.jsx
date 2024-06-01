@@ -18,6 +18,7 @@ import react from "../../assets/imgs/react.svg";
 import git from "../../assets/imgs/git.svg";
 import node from "../../assets/imgs/nodejs.svg";
 import firebase from "../../assets/imgs/firebase.svg";
+import docker from "../../assets/imgs/docker.svg";
 import project from "../../assets/imgs/project.svg";
 import githubcardgif from "../../assets/imgs/githubcardgif.gif";
 import caplolgif from "../../assets/imgs/caplolgif.gif";
@@ -25,7 +26,8 @@ import clock from "../../assets/imgs/clock.png";
 import moon from "../../assets/imgs/moon.svg";
 import sun from "../../assets/imgs/sun.svg";
 import forgetgif from "../../assets/imgs/4getgif.gif";
-
+import idezgif from "../../assets/imgs/ideztelecomgif.gif";
+import contaslolgif from "../../assets/imgs/repocontaslolgif.gif";
 
 const Home = () => {
     const [repositories, setRepositories] = useState([]);
@@ -57,7 +59,7 @@ const Home = () => {
 
     const handleToggleMode = () => {
         setIsWhiteMode(!isWhiteMode);
-        setButtonImage(isWhiteMode ? sun : moon); 
+        setButtonImage(isWhiteMode ? sun : moon);
     };
 
     useEffect(() => {
@@ -89,7 +91,7 @@ const Home = () => {
                 <div>
                     <div className="text">
                         <h1>{typedText}</h1>
-                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um estudante entusiasmado de Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao desenvolvimento de software.</p>
+                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um formando em Bacharelado em Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao desenvolvimento de software.</p>
                     </div>
 
                     <div className="skills">
@@ -109,6 +111,7 @@ const Home = () => {
                     <div className="skills">
                         <h2>/ dev-ops</h2>
                         <img src={git} alt="git" />
+                        <img src={docker} alt="docker" />
                     </div>
                 </div>
 
@@ -129,6 +132,18 @@ const Home = () => {
 
 
                 <div className="exp-list">
+                <div className="exp">
+                        <h1>
+                            <img src={job} />
+                            Analista de TI
+                        </h1>
+                        <h2>Terram Soluções Agronômicas</h2>
+                        <h2>abril de 2024 até o momento</h2>
+                        <p>• Automação de atividades.</p>
+                        <p>• Manutenção do servidor utilizado via nuvem e localmente.</p>
+                        <p>• Manutenção de equipamentos e dispositivos utilizados por colaboradores.</p>
+                    </div>
+
                     <div className="exp">
                         <h1>
                             <img src={job} />
@@ -191,7 +206,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
-                                    <p>1 dia.</p>
+                                    <p>1d</p>
                                 </div>
                             </div>
                         </div>
@@ -218,7 +233,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
-                                    <p>1 mês.</p>
+                                    <p>1m</p>
                                 </div>
                             </div>
                         </div>
@@ -231,7 +246,7 @@ const Home = () => {
                             <h2>/4get List</h2>
                             <p>Uma to-do list simples em que as tasks são armazenadas em local storage.</p>
                             <div className="project-info">
-                            <div className="project-skills">
+                                <div className="project-skills">
                                     <img src={react} />
                                     <p>react</p>
                                 </div>
@@ -245,11 +260,69 @@ const Home = () => {
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
-                                    <p>1 dia.</p>
+                                    <p>1d</p>
                                 </div>
                             </div>
                         </div>
                         <a href="https://4get-list.vercel.app/" target="_blank">ver projeto</a>
+                    </div>
+
+                    <div>
+                        <div className="project">
+                            <img src={idezgif} />
+                            <h2>Idez Telecom</h2>
+                            <p>Site desenvolvido para uma empresa provedora de internet, com área do cliente + landing page.</p>
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={react} />
+                                    <p>react</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={node} />
+                                    <p>node</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id='javascript'>js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>2m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://idez-telecom.vercel.app/" target="_blank">ver projeto</a>
+                    </div>
+
+                    <div>
+                        <div className="project">
+                            <img src={contaslolgif} />
+                            <h2>Repo ContasLOL</h2>
+                            <p>Uma aplicação web intuitiva para organizar e gerenciar suas contas de League of Legends.</p>
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={react} />
+                                    <p>react</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id='javascript'>js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>2m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://repo-contaslol.vercel.app/" target="_blank">ver projeto</a>
                     </div>
 
                 </div>
