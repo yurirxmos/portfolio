@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
@@ -14,6 +14,9 @@ import profile from "../../assets/imgs/profile.png";
 import html from "../../assets/imgs/html.svg";
 import css from "../../assets/imgs/css.svg";
 import js from "../../assets/imgs/javascript.svg";
+import vue from "../../assets/imgs/vue.svg";
+import ts from "../../assets/imgs/ts.svg";
+import vite from "../../assets/imgs/vite.svg";
 import react from "../../assets/imgs/react.svg";
 import git from "../../assets/imgs/git.svg";
 import node from "../../assets/imgs/nodejs.svg";
@@ -28,19 +31,20 @@ import sun from "../../assets/imgs/sun.svg";
 import forgetgif from "../../assets/imgs/4getgif.gif";
 import idezgif from "../../assets/imgs/ideztelecomgif.gif";
 import contaslolgif from "../../assets/imgs/repocontaslolgif.gif";
+import jsonviewergif from "../../assets/imgs/jsonviewergif.gif";
 
 const Home = () => {
     const [repositories, setRepositories] = useState([]);
-    const [typedText, setTypedText] = useState('');
+    const [typedText, setTypedText] = useState("");
     const text = "Olá, seja bem vindo ao meu portfólio!";
     const [buttonImage, setButtonImage] = useState(sun);
     const [isWhiteMode, setIsWhiteMode] = useState(false);
 
     useEffect(() => {
-        fetch('https://api.github.com/users/yurirxmos/repos')
-            .then(response => response.json())
-            .then(data => setRepositories(data))
-            .catch(error => console.error('Erro ao buscar repositórios:', error));
+        fetch("https://api.github.com/users/yurirxmos/repos")
+            .then((response) => response.json())
+            .then((data) => setRepositories(data))
+            .catch((error) => console.error("Erro ao buscar repositórios:", error));
     }, []);
 
     useEffect(() => {
@@ -64,15 +68,14 @@ const Home = () => {
 
     useEffect(() => {
         if (isWhiteMode) {
-            document.body.classList.add('white-mode');
+            document.body.classList.add("white-mode");
         } else {
-            document.body.classList.remove('white-mode');
+            document.body.classList.remove("white-mode");
         }
     }, [isWhiteMode]);
 
     return (
-        <div className={`main ${isWhiteMode ? 'white-mode' : ''}`}>
-
+        <div className={`main ${isWhiteMode ? "white-mode" : ""}`}>
             <button type="button" onClick={handleToggleMode} className="addons">
                 <img src={buttonImage} />
             </button>
@@ -86,12 +89,15 @@ const Home = () => {
             <Separator />
 
             <div className="home-title">
-
-
                 <div>
                     <div className="text">
                         <h1>{typedText}</h1>
-                        <p>Meu nome é Yuri Ramos, tenho 22 anos e sou um formando em Bacharelado em Ciências da Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao desenvolvimento de software.</p>
+                        <p>
+                            Meu nome é Yuri Ramos, tenho 22 anos e sou um formando em Bacharelado em Ciências da
+                            Computação na Universidade Federal de Jataí. Minha paixão pela tecnologia e pela resolução
+                            de problemas me levou a explorar diversas áreas dentro da computação, que me levou ao
+                            desenvolvimento de software.
+                        </p>
                     </div>
 
                     <div className="skills">
@@ -99,7 +105,9 @@ const Home = () => {
                         <img src={html} alt="html" />
                         <img src={css} alt="css" />
                         <img src={js} alt="javascript" />
+                        <img src={ts} alt="ts" />
                         <img src={react} alt="react" />
+                        <img src={vue} alt="vue" />
                     </div>
 
                     <div className="skills">
@@ -115,13 +123,9 @@ const Home = () => {
                     </div>
                 </div>
 
-
-
                 <div>
                     <img src={profile} alt="profilepic" />
                 </div>
-
-
             </div>
 
             <Separator />
@@ -130,18 +134,35 @@ const Home = () => {
                 <img src={job} />
                 <h1>EXPERIÊNCIA PROFISSIONAL</h1>
 
+                <div className="exp-details">
+                    <img src={linkedin} />
+                    <a
+                        className="exp-button"
+                        href="https://www.linkedin.com/in/yurirxmos/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        VER TUDO
+                    </a>
+                </div>
 
                 <div className="exp-list">
-                <div className="exp">
+                    <div className="exp">
                         <h1>
                             <img src={job} />
-                            Analista de TI
+                            Desenvolvedor front-end
                         </h1>
                         <h2>Terram Soluções Agronômicas</h2>
                         <h2>abril de 2024 até o momento</h2>
-                        <p>• Automação de atividades.</p>
-                        <p>• Manutenção do servidor utilizado via nuvem e localmente.</p>
-                        <p>• Manutenção de equipamentos e dispositivos utilizados por colaboradores.</p>
+                    </div>
+
+                    <div className="exp">
+                        <h1>
+                            <img src={job} />
+                            Desenvolvedor full-stack
+                        </h1>
+                        <h2>Vizantu Agência de Publicidade</h2>
+                        <h2>fevereiro de 2024 até fevereiro de 2025</h2>
                     </div>
 
                     <div className="exp">
@@ -151,8 +172,6 @@ const Home = () => {
                         </h1>
                         <h2>Freelancer</h2>
                         <h2>abril de 2023 até o momento</h2>
-                        <p>• HTML, CSS e Bootstrap para o desenvolvimento de interfaces responsivas e atrativas ao usuário.</p>
-                        <p>• JavaScript, React, React Router para criação dinâmica de websites.</p>
                     </div>
 
                     <div className="exp">
@@ -162,8 +181,6 @@ const Home = () => {
                         </h1>
                         <h2>Universidade Federal de Jataí</h2>
                         <h2>fevereiro de 2023 até abril de 2023</h2>
-                        <p>• Desenvolvimento de sites com low code (Google Sites, WordPress).</p>
-                        <p>• Experiência em integração de gráficos do Power BI via iframe para visualizações dinâmicas.</p>
                     </div>
 
                     <div className="exp">
@@ -173,8 +190,6 @@ const Home = () => {
                         </h1>
                         <h2>Terram Soluções Agronômicas</h2>
                         <h2>novembro de 2021 até janeiro de 2022</h2>
-                        <p>• Automação de atividades com utilização de scripts em Python.</p>
-                        <p>• Manutenção do servidor utilizado via nuvem e localmente.</p>
                     </div>
                 </div>
             </div>
@@ -188,9 +203,81 @@ const Home = () => {
                 <div className="project-list">
                     <div>
                         <div className="project">
+                            <img src={idezgif} />
+                            <h2>Idez Telecom</h2>
+                            <p>
+                                Site desenvolvido para uma empresa provedora de internet, com área do cliente + landing
+                                page.
+                            </p>
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={react} />
+                                    <p>react</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={css} />
+                                    <p>css</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={node} />
+                                    <p>node</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={js} />
+                                    <p id="javascript">js</p>
+                                </div>
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>2m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://idez-telecom.vercel.app/" target="_blank">
+                            ver projeto
+                        </a>
+                    </div>
+
+                    <div>
+                        <div className="project">
+                            <img src={jsonviewergif} />
+                            <h2>JSON Viewer</h2>
+                            <p>
+                                Projeto para converter jsons de uma forma mais visual e agradável ao programador.
+                            </p>
+                            <div className="project-info">
+                                <div className="project-skills">
+                                    <img src={vue} />
+                                    <p>vue</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={vite} />
+                                    <p>vite</p>
+                                </div>
+                                <div className="project-skills">
+                                    <img src={ts} />
+                                    <p>ts</p>
+                                </div>
+                                
+
+                                <div className="project-time">
+                                    <img src={clock} />
+                                    <p>2m</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="https://project-json-viewer.vercel.app/" target="_blank">
+                            ver projeto
+                        </a>
+                    </div>
+
+                    <div>
+                        <div className="project">
                             <img src={githubcardgif} />
                             <h2>GitHub Card</h2>
-                            <p>Um card que mostra as informações do perfil do Github atráves da inserção do nome de usuário.</p>
+                            <p>
+                                Um card que mostra as informações do perfil do Github atráves da inserção do nome de
+                                usuário.
+                            </p>
                             <div className="project-info">
                                 <div className="project-skills">
                                     <img src={html} />
@@ -202,7 +289,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-skills">
                                     <img src={js} />
-                                    <p id='javascript'>js</p>
+                                    <p id="javascript">js</p>
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
@@ -210,14 +297,19 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://yurirxmos.github.io/github-card/" target="_blank">ver projeto</a>
+                        <a href="https://yurirxmos.github.io/github-card/" target="_blank">
+                            ver projeto
+                        </a>
                     </div>
 
                     <div>
                         <div className="project">
                             <img src={caplolgif} />
                             <h2>CAPLOL</h2>
-                            <p>Um site multiabas pra visualizar informações de um campeonato, assim como tabela, jogos e transmissão.</p>
+                            <p>
+                                Site multiabas pra visualizar informações de um campeonato, assim como tabela, jogos
+                                e transmissão.
+                            </p>
                             <div className="project-info">
                                 <div className="project-skills">
                                     <img src={html} />
@@ -229,7 +321,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-skills">
                                     <img src={js} />
-                                    <p id='javascript'>js</p>
+                                    <p id="javascript">js</p>
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
@@ -237,7 +329,9 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://caplol-site.vercel.app/" target="_blank">ver projeto</a>
+                        <a href="https://caplol-site.vercel.app/" target="_blank">
+                            ver projeto
+                        </a>
                     </div>
 
                     <div>
@@ -256,7 +350,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-skills">
                                     <img src={js} />
-                                    <p id='javascript'>js</p>
+                                    <p id="javascript">js</p>
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
@@ -264,45 +358,18 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://4get-list.vercel.app/" target="_blank">ver projeto</a>
-                    </div>
-
-                    <div>
-                        <div className="project">
-                            <img src={idezgif} />
-                            <h2>Idez Telecom</h2>
-                            <p>Site desenvolvido para uma empresa provedora de internet, com área do cliente + landing page.</p>
-                            <div className="project-info">
-                                <div className="project-skills">
-                                    <img src={react} />
-                                    <p>react</p>
-                                </div>
-                                <div className="project-skills">
-                                    <img src={css} />
-                                    <p>css</p>
-                                </div>
-                                <div className="project-skills">
-                                    <img src={node} />
-                                    <p>node</p>
-                                </div>
-                                <div className="project-skills">
-                                    <img src={js} />
-                                    <p id='javascript'>js</p>
-                                </div>
-                                <div className="project-time">
-                                    <img src={clock} />
-                                    <p>2m</p>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="https://idez-telecom.vercel.app/" target="_blank">ver projeto</a>
+                        <a href="https://4get-list.vercel.app/" target="_blank">
+                            ver projeto
+                        </a>
                     </div>
 
                     <div>
                         <div className="project">
                             <img src={contaslolgif} />
                             <h2>Repo ContasLOL</h2>
-                            <p>Uma aplicação web intuitiva para organizar e gerenciar suas contas de League of Legends.</p>
+                            <p>
+                                Uma aplicação web intuitiva para organizar e gerenciar suas contas de League of Legends.
+                            </p>
                             <div className="project-info">
                                 <div className="project-skills">
                                     <img src={react} />
@@ -314,7 +381,7 @@ const Home = () => {
                                 </div>
                                 <div className="project-skills">
                                     <img src={js} />
-                                    <p id='javascript'>js</p>
+                                    <p id="javascript">js</p>
                                 </div>
                                 <div className="project-time">
                                     <img src={clock} />
@@ -322,9 +389,10 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                        <a href="https://repo-contaslol.vercel.app/" target="_blank">ver projeto</a>
+                        <a href="https://repo-contaslol.vercel.app/" target="_blank">
+                            ver projeto
+                        </a>
                     </div>
-
                 </div>
             </div>
 
@@ -334,8 +402,14 @@ const Home = () => {
                 <img src={repos} alt="Repos" />
                 <h1>REPOSITÓRIOS</h1>
                 <div className="repo-list">
-                    {repositories.map(repo => (
-                        <a key={repo.id} href={repo.html_url} target="_blank" rel="noopener noreferrer" className="repo-item">
+                    {repositories.map((repo) => (
+                        <a
+                            key={repo.id}
+                            href={repo.html_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="repo-item"
+                        >
                             <img src={repos} />
                             <b>{repo.name}</b>
                             {repo.description && <p>{repo.description}</p>}
@@ -351,7 +425,10 @@ const Home = () => {
                 <h1>CONTATO</h1>
 
                 <div>
-                    <a href="https://api.whatsapp.com/send?phone=5564999678964&text=Ol%C3%A1,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20mais!" target="_blank">
+                    <a
+                        href="https://api.whatsapp.com/send?phone=5564999678964&text=Ol%C3%A1,%20vi%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20mais!"
+                        target="_blank"
+                    >
                         <img src={wpp} />
                         WhatsApp
                     </a>
@@ -371,7 +448,6 @@ const Home = () => {
             <Separator />
 
             <Footer />
-
         </div>
     );
 };
