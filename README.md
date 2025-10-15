@@ -1,33 +1,36 @@
-**Portfólio**
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Este projeto é um portfólio pessoal desenvolvido para apresentar minhas habilidades, experiências e projetos. O objetivo principal é oferecer uma experiência interativa aos visitantes, destacando meu trabalho e conhecimento em desenvolvimento web.
+## Getting Started
 
-### Funcionalidades
+First, run the development server:
 
-- **Apresentação Interativa:** Explore meu portfólio de forma interativa, navegando por diferentes seções que destacam habilidades, experiências e projetos.
-- **Rolagem Suave:** Desfrute de uma experiência de rolagem suave ao explorar o conteúdo do portfólio.
-- **Integração com GitHub:** Visualize alguns dos meus repositórios do GitHub diretamente no portfólio.
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-### Tecnologias Utilizadas
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- React
-- Vite
-- CSS (estilizado com componentes e arquivos CSS)
-- GitHub API (para exibir repositórios)
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Estrutura do Projeto
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- **src/:** Contém o código-fonte do projeto.
-- **public/:** Contém arquivos estáticos e o ponto de entrada HTML.
+## Learn More
 
-### Como Explorar
+To learn more about Next.js, take a look at the following resources:
 
-1. Abra o site (https://yurirxmos-portfolio.vercel.app).
-2. Explore as diferentes seções do portfólio, incluindo habilidades, experiências e projetos.
-3. Desfrute de uma navegação intuitiva e informações detalhadas sobre meu trabalho.
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Observações
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-Este projeto é uma demonstração do meu trabalho e habilidades no desenvolvimento web. Sinta-se à vontade para entrar em contato para feedback, sugestões ou oportunidades de colaboração.
+## Deploy on Vercel
 
-**Desenvolvido com ❤️ por Yuri Ramos.**
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
