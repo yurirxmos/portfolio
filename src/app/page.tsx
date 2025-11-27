@@ -138,8 +138,8 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center  p-24">
-      <div className="text-left text-md w-2xl">
+    <div className="min-h-screen flex flex-col items-center p-12 md:p-24">
+      <div className="text-left text-md md:w-2xl">
         <div className="flex items-center justify-between w-full mb-5">
           <div className="flex items-center gap-2 group hover:cursor-pointer">
             <GiSharpShuriken className="group-hover:animate-spin" />
