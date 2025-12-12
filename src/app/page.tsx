@@ -138,9 +138,9 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-12 md:p-24">
+    <div className="min-h-screen flex flex-col items-center pt-10 px-12 md:px-24">
       <div className="text-left text-md md:w-2xl">
-        <div className="flex items-center justify-between w-full mb-5">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 items-center justify-between w-full mb-5 ">
           <div className="flex items-center gap-2 group hover:cursor-pointer">
             <GiSharpShuriken className="group-hover:animate-spin" />
             <h1 className="font-semibold">Yuri Ramos</h1>
@@ -182,7 +182,7 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="text-md mb-5">
+        <p className="text-md mb-5 text-justify ">
           {replaceTemplate(t.description1, { years: String(years) })}
           <br></br>
           <br></br>
@@ -190,9 +190,6 @@ export default function Home() {
           <br></br>
           <br></br>
           {replaceTemplate(t.description3, { contributions: loading ? "...." : String(contributions) })}
-        </p>
-
-        <p className="text-md mt-10">
           {t.footer1} <b>{t.experiences}</b> {t.footer2}{" "}
           <a
             href="https://www.linkedin.com/in/yurirxmos/"
