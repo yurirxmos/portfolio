@@ -6,6 +6,7 @@ export interface GithubRepository {
   homepage: string | null;
   language: string | null;
   stargazers_count: number;
+  created_at: string;
   updated_at: string;
   fork: boolean;
   private: boolean;

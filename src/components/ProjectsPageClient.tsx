@@ -40,13 +40,11 @@ const translations = {
   br: {
     home: "home",
     projects: "projetos",
-    title: "projects",
+    title: "/projetos",
     subtitle:
       "Lista de projetos publicados no meu GitHub, atualizada automaticamente.",
     repository: "github",
     demo: "demo",
-    noDescription:
-      "Projeto sem descrição pública no GitHub, mas ativo e mantido recentemente.",
     error:
       "Nao foi possivel carregar os projetos agora. Tente novamente em alguns instantes.",
     empty: "Nenhum projeto encontrado no momento.",
@@ -54,23 +52,20 @@ const translations = {
   en: {
     home: "home",
     projects: "projects",
-    title: "projects",
+    title: "/projects",
     subtitle: "Public projects from my GitHub profile, updated automatically.",
     repository: "github",
     demo: "demo",
-    noDescription:
-      "Project without a public GitHub description, but actively maintained.",
     error: "Could not load projects now. Please try again in a few moments.",
     empty: "No projects found right now.",
   },
   cn: {
     home: "主页",
     projects: "项目",
-    title: "projects",
+    title: "/项目",
     subtitle: "来自我 GitHub 的公开项目列表，自动更新。",
     repository: "github",
     demo: "演示",
-    noDescription: "该项目在 GitHub 上暂无公开描述，但仍在积极维护。",
     error: "当前无法加载项目，请稍后重试。",
     empty: "当前没有可展示的项目。",
   },
@@ -313,9 +308,11 @@ export function ProjectsPageClient({
                     <h2 className="text-lg font-semibold md:text-xl">
                       {project.name}
                     </h2>
-                    <p className="text-sm text-foreground/80">
-                      {project.description ?? t.noDescription}
-                    </p>
+                    {project.description ? (
+                      <p className="text-sm text-foreground/80">
+                        {project.description}
+                      </p>
+                    ) : null}
                   </div>
 
                   <div className="mt-6 flex items-center justify-between gap-4">

@@ -10,6 +10,11 @@ export const metadata: Metadata = {
     "Selected software engineering projects from Yuri Ramos, fetched directly from GitHub.",
 };
 
+const getTimestamp = (dateValue: string): number => {
+  const timestamp = Date.parse(dateValue);
+  return Number.isNaN(timestamp) ? 0 : timestamp;
+};
+
 const mapRepositoriesToProjects = (
   repositories: GithubRepository[],
 ): Project[] => {
@@ -21,6 +26,25 @@ const mapRepositoriesToProjects = (
         !repository.archived &&
         repository.name !== "portfolio",
     )
+    .sort((firstRepository, secondRepository) => {
+      const createdAtDifference =
+        getTimestamp(secondRepository.created_at) -
+        getTimestamp(firstRepository.created_at);
+
+      if (createdAtDifference !== 0) {
+        return createdAtDifference;
+      }
+
+      const updatedAtDifference =
+        getTimestamp(secondRepository.updated_at) -
+        getTimestamp(firstRepository.updated_at);
+
+      if (updatedAtDifference !== 0) {
+        return updatedAtDifference;
+      }
+
+      return firstRepository.name.localeCompare(secondRepository.name);
+    })
     .map((repository) => ({
       id: repository.id,
       name: repository.name,
@@ -33,12 +57,7 @@ const mapRepositoriesToProjects = (
       language: repository.language ?? "",
       stars: repository.stargazers_count,
       updatedAt: repository.updated_at,
-    }))
-    .sort(
-      (firstProject, secondProject) =>
-        new Date(secondProject.updatedAt).getTime() -
-        new Date(firstProject.updatedAt).getTime(),
-    );
+    }));
 };
 
 const fetchGithubProjects = async (): Promise<Project[]> => {
@@ -51,10 +70,10 @@ const fetchGithubProjects = async (): Promise<Project[]> => {
   }
 
   const response = await fetch(
-    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100&type=owner`,
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=created&per_page=100&type=owner`,
     {
       headers,
-      next: { revalidate: 3600 },
+      cache: "no-store",
     },
   );
 

@@ -30,13 +30,13 @@ export function TopNavbar({
 
       <div className="mx-auto flex items-center gap-2">
         {activePage !== "home" ? (
-          <Link className="text-xs underline hover:opacity-50" href="/">
+          <Link className="text-xs hover:opacity-50" href="/">
             {homeLabel}
           </Link>
         ) : null}
 
         {activePage !== "projects" ? (
-          <Link className="text-xs underline hover:opacity-50" href="/projects">
+          <Link className="text-xs hover:opacity-50" href="/projects">
             {projectsLabel}
           </Link>
         ) : null}
