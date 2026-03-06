@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Forum, Geist, Geist_Mono, Fira_Code } from "next/font/google";
+import { Fira_Code, Forum, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,7 +24,8 @@ const firaCode = Fira_Code({
 
 export const metadata: Metadata = {
   title: "yurirxmos portfolio.",
-  description: "welcome to my personal portfolio website, talking about me personally and professionally.",
+  description:
+    "welcome to my personal portfolio website, talking about me personally and professionally.",
 };
 
 export default function RootLayout({
@@ -34,7 +35,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} ${forum.className} ${firaCode.className} antialiased`}>{children}</body>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${forum.className} ${firaCode.className} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

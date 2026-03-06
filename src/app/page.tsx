@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GiBrazilFlag, GiSharpShuriken } from "react-icons/gi";
-import { LiaFlagUsaSolid } from "react-icons/lia";
-import { RiEmphasisCn } from "react-icons/ri";
-
-type Language = "br" | "en" | "cn";
+import { TopNavbar } from "@/components/TopNavbar";
+import {
+  detectLanguageFromBrowser,
+  isSupportedLanguage,
+  LANGUAGE_STORAGE_KEY,
+  type Language,
+} from "@/lib/language";
 
 const translations = {
   br: {
@@ -21,9 +23,12 @@ const translations = {
     and: "e se quiser ver",
     myCode: "meu código",
     footer3: "fique a vontade pra acessar meu",
-    footer4: "Caso queira conhecer mais do Yuri como pessoa você pode também me seguir no",
+    footer4:
+      "Caso queira conhecer mais do Yuri como pessoa você pode também me seguir no",
     footer5: "Se tiver interesse em me conhecer mais me mande um e-mail :)",
     or: "ou",
+    projects: "projetos",
+    home: "home",
   },
   en: {
     description1:
@@ -38,9 +43,13 @@ const translations = {
     and: "and if you want to see",
     myCode: "my code",
     footer3: "feel free to access my",
-    footer4: "If you want to know more about Yuri as a person, you can also follow me on",
-    footer5: "If you're interested in getting to know me better, send me an email :)",
+    footer4:
+      "If you want to know more about Yuri as a person, you can also follow me on",
+    footer5:
+      "If you're interested in getting to know me better, send me an email :)",
     or: "or",
+    projects: "projects",
+    home: "home",
   },
   cn: {
     description1:
@@ -58,6 +67,8 @@ const translations = {
     footer4: "如果您想更多地了解作为人的Yuri，您也可以在",
     footer5: "如果您有兴趣更好地了解我，请给我发邮件 :)",
     or: "或",
+    projects: "项目",
+    home: "主页",
   },
 };
 
@@ -74,17 +85,20 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState<Language>("br");
 
-  // Detecta o idioma do navegador do usuário
   useEffect(() => {
-    const browserLang = navigator.language.toLowerCase();
-    if (browserLang.startsWith("zh")) {
-      setLanguage("cn");
-    } else if (browserLang.startsWith("en")) {
-      setLanguage("en");
-    } else {
-      setLanguage("br");
+    const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+
+    if (savedLanguage && isSupportedLanguage(savedLanguage)) {
+      setLanguage(savedLanguage);
+      return;
     }
+
+    setLanguage(detectLanguageFromBrowser(navigator.language));
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+  }, [language]);
 
   useEffect(() => {
     const fetchContributions = async () => {
@@ -133,54 +147,23 @@ export default function Home() {
 
   const t = translations[language];
 
-  const replaceTemplate = (text: string, values: Record<string, string | number>) => {
+  const replaceTemplate = (
+    text: string,
+    values: Record<string, string | number>,
+  ) => {
     return text.replace(/{(\w+)}/g, (_, key) => String(values[key] || ""));
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center pt-10 px-12 md:px-24">
-      <div className="text-left text-md md:w-2xl">
-        <div className="flex flex-col sm:flex-row gap-2 sm:gap-0 items-center justify-between w-full mb-5 ">
-          <div className="flex items-center gap-2 group hover:cursor-pointer">
-            <GiSharpShuriken className="group-hover:animate-spin" />
-            <h1 className="font-semibold">Yuri Ramos</h1>
-          </div>
-
-          <div className="flex flex-row items-center gap-4">
-            <button
-              type="button"
-              className={`hover:opacity-50 flex items-center gap-1 text-xs hover:cursor-pointer ${
-                language === "br" ? "border-b border-border" : ""
-              }`}
-              onClick={() => setLanguage("br")}
-            >
-              BR
-              <GiBrazilFlag size={18} />
-            </button>
-
-            <button
-              type="button"
-              className={`hover:opacity-50 flex items-center gap-1 text-xs hover:cursor-pointer ${
-                language === "en" ? "border-b border-border" : ""
-              }`}
-              onClick={() => setLanguage("en")}
-            >
-              EN
-              <LiaFlagUsaSolid size={18} />
-            </button>
-
-            <button
-              type="button"
-              className={`hover:opacity-50 flex items-center gap-1 text-xs hover:cursor-pointer ${
-                language === "cn" ? "border-b border-border" : ""
-              }`}
-              onClick={() => setLanguage("cn")}
-            >
-              CN
-              <RiEmphasisCn size={18} />
-            </button>
-          </div>
-        </div>
+    <div className="min-h-screen px-6 py-10 md:px-24">
+      <div className="mx-auto w-full max-w-5xl text-left text-md">
+        <TopNavbar
+          activePage="home"
+          homeLabel={t.home}
+          language={language}
+          onLanguageChange={setLanguage}
+          projectsLabel={t.projects}
+        />
 
         <p className="text-md mb-5 text-justify ">
           {replaceTemplate(t.description1, { years: String(years) })}
@@ -189,7 +172,9 @@ export default function Home() {
           {t.description2}
           <br></br>
           <br></br>
-          {replaceTemplate(t.description3, { contributions: loading ? "...." : String(contributions) })}
+          {replaceTemplate(t.description3, {
+            contributions: loading ? "...." : String(contributions),
+          })}
           {t.footer1} <b>{t.experiences}</b> {t.footer2}{" "}
           <a
             href="https://www.linkedin.com/in/yurirxmos/"
@@ -221,17 +206,11 @@ export default function Home() {
           <br></br>
           {t.footer5}
           <br></br>
-          <a
-            href="mailto:yuriramos2406@gmail.com"
-            className="underline"
-          >
+          <a href="mailto:yuriramos2406@gmail.com" className="underline">
             yuriramos2406@gmail.com
           </a>{" "}
           {t.or}{" "}
-          <a
-            href="mailto:yuri@rxmos.dev.br"
-            className="underline"
-          >
+          <a href="mailto:yuri@rxmos.dev.br" className="underline">
             yuri@rxmos.dev.br
           </a>
         </p>
