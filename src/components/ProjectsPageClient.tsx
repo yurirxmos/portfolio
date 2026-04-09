@@ -36,11 +36,23 @@ interface TechnologyIconInfo {
   colorClassName: string;
 }
 
+interface ScrollAreaProps {
+  children: ReactNode;
+}
+
+const ScrollArea = ({ children }: ScrollAreaProps) => {
+  return (
+    <div className="max-h-[60vh] overflow-y-auto pr-2 [scrollbar-width:thin]">
+      {children}
+    </div>
+  );
+};
+
 const translations = {
   br: {
     home: "home",
     projects: "projetos",
-    title: "/projetos",
+    title: "projetos",
     subtitle:
       "Lista de projetos publicados no meu GitHub, atualizada automaticamente.",
     repository: "github",
@@ -52,7 +64,7 @@ const translations = {
   en: {
     home: "home",
     projects: "projects",
-    title: "/projects",
+    title: "projects",
     subtitle: "Public projects from my GitHub profile, updated automatically.",
     repository: "github",
     demo: "demo",
@@ -62,7 +74,7 @@ const translations = {
   cn: {
     home: "主页",
     projects: "项目",
-    title: "/项目",
+    title: "项目",
     subtitle: "来自我 GitHub 的公开项目列表，自动更新。",
     repository: "github",
     demo: "演示",
@@ -265,7 +277,7 @@ export function ProjectsPageClient({
   const hasProjects = useMemo(() => projects.length > 0, [projects.length]);
 
   return (
-    <div className="min-h-screen px-6 py-10 md:px-24">
+    <div className="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-10 md:px-24">
       <div className="mx-auto w-full max-w-5xl">
         <TopNavbar
           activePage="projects"
@@ -295,68 +307,70 @@ export function ProjectsPageClient({
         ) : null}
 
         {!hasError && hasProjects ? (
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {projects.map((project) => {
-              const technologies = getProjectTechnologies(project);
+          <ScrollArea>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {projects.map((project) => {
+                const technologies = getProjectTechnologies(project);
 
-              return (
-                <article
-                  className="flex h-full flex-col justify-between rounded-xl border border-foreground/10 p-5"
-                  key={project.id}
-                >
-                  <div className="space-y-3">
-                    <h2 className="text-lg font-semibold md:text-xl">
-                      {project.name}
-                    </h2>
-                    {project.description ? (
-                      <p className="text-sm text-foreground/80">
-                        {project.description}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  <div className="mt-6 flex items-center justify-between gap-4">
-                    <div className="flex flex-wrap items-center gap-2 text-xs text-foreground/75">
-                      {technologies.map((technology) => (
-                        <span
-                          key={`${project.id}-${technology.key}`}
-                          title={technology.label}
-                        >
-                          <span
-                            className={`inline-flex items-center ${technology.colorClassName}`}
-                          >
-                            {technology.icon}
-                          </span>
-                        </span>
-                      ))}
+                return (
+                  <article
+                    className="flex h-full flex-col justify-between rounded-xl border border-foreground/10 p-5"
+                    key={project.id}
+                  >
+                    <div className="space-y-3">
+                      <h2 className="text-lg font-semibold md:text-xl">
+                        {project.name}
+                      </h2>
+                      {project.description ? (
+                        <p className="text-sm text-foreground/80">
+                          {project.description}
+                        </p>
+                      ) : null}
                     </div>
 
-                    <div className="flex items-center gap-4 text-sm">
-                      <a
-                        className="underline hover:opacity-70"
-                        href={project.repositoryUrl}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                      >
-                        {t.repository}
-                      </a>
+                    <div className="mt-6 flex items-center justify-between gap-4">
+                      <div className="flex flex-wrap items-center gap-2 text-xs text-foreground/75">
+                        {technologies.map((technology) => (
+                          <span
+                            key={`${project.id}-${technology.key}`}
+                            title={technology.label}
+                          >
+                            <span
+                              className={`inline-flex items-center ${technology.colorClassName}`}
+                            >
+                              {technology.icon}
+                            </span>
+                          </span>
+                        ))}
+                      </div>
 
-                      {project.demoUrl ? (
+                      <div className="flex items-center gap-4 text-sm">
                         <a
                           className="underline hover:opacity-70"
-                          href={project.demoUrl}
+                          href={project.repositoryUrl}
                           rel="noopener noreferrer"
                           target="_blank"
                         >
-                          {t.demo}
+                          {t.repository}
                         </a>
-                      ) : null}
+
+                        {project.demoUrl ? (
+                          <a
+                            className="underline hover:opacity-70"
+                            href={project.demoUrl}
+                            rel="noopener noreferrer"
+                            target="_blank"
+                          >
+                            {t.demo}
+                          </a>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                  </article>
+                );
+              })}
+            </div>
+          </ScrollArea>
         ) : null}
       </div>
     </div>

@@ -155,7 +155,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen px-6 py-10 md:px-24">
+    <div className="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-10 md:px-24">
       <div className="mx-auto w-full max-w-5xl text-left text-md">
         <TopNavbar
           activePage="home"
@@ -164,6 +164,10 @@ export default function Home() {
           onLanguageChange={setLanguage}
           projectsLabel={t.projects}
         />
+
+        <div className="mb-5">
+          <h1 className="text-3xl font-semibold md:text-4xl">Yuri Ramos</h1>
+        </div>
 
         <p className="text-md mb-5 text-justify ">
           {replaceTemplate(t.description1, { years: String(years) })}

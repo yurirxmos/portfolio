@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Fira_Code, Forum, Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import { THEME_STORAGE_KEY, ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -28,17 +30,34 @@ export const metadata: Metadata = {
     "welcome to my personal portfolio website, talking about me personally and professionally.",
 };
 
+const themeScript = `(() => {
+  try {
+    const savedTheme = window.localStorage.getItem('${THEME_STORAGE_KEY}');
+    const theme = savedTheme === 'light' || savedTheme === 'dark'
+      ? savedTheme
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light';
+
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.dataset.theme = theme;
+  } catch {}
+})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${forum.className} ${firaCode.className} antialiased`}
       >
-        {children}
+        <Script id="theme-script" strategy="beforeInteractive">
+          {themeScript}
+        </Script>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
