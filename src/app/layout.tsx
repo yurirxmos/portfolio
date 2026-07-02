@@ -1,18 +1,8 @@
 import type { Metadata } from "next";
-import { Fira_Code, Geist, Geist_Mono, IBM_Plex_Sans } from "next/font/google";
+import { Fira_Code, IBM_Plex_Sans } from "next/font/google";
 import Script from "next/script";
 import { THEME_STORAGE_KEY, ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
@@ -54,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexSans.className} ${firaCode.className} flex min-h-screen flex-col antialiased`}
+        className={`${ibmPlexSans.className} ${firaCode.className} flex min-h-screen flex-col antialiased`}
       >
         <Script id="theme-script" strategy="beforeInteractive">
           {themeScript}
