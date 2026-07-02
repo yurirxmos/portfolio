@@ -57,6 +57,11 @@ export default function RootLayout({
         <Script id="theme-script" strategy="beforeInteractive">
           {themeScript}
         </Script>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="2e2ef658-5aa9-4210-8270-53e9414bbea5"
+          strategy="afterInteractive"
+        />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
