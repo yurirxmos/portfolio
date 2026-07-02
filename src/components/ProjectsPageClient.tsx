@@ -1,7 +1,15 @@
 "use client";
 
-import { type ReactNode, useEffect, useMemo, useState } from "react";
-import { FaJava } from "react-icons/fa6";
+import { motion } from "framer-motion";
+import {
+  type ReactNode,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { FaChevronLeft, FaChevronRight, FaJava } from "react-icons/fa6";
 import { FiCode } from "react-icons/fi";
 import {
   SiCss3,
@@ -36,18 +44,6 @@ interface TechnologyIconInfo {
   colorClassName: string;
 }
 
-interface ScrollAreaProps {
-  children: ReactNode;
-}
-
-const ScrollArea = ({ children }: ScrollAreaProps) => {
-  return (
-    <div className="max-h-[60vh] overflow-y-auto pr-2 [scrollbar-width:thin]">
-      {children}
-    </div>
-  );
-};
-
 const translations = {
   br: {
     home: "home",
@@ -60,6 +56,7 @@ const translations = {
     error:
       "Nao foi possivel carregar os projetos agora. Tente novamente em alguns instantes.",
     empty: "Nenhum projeto encontrado no momento.",
+    repositories: "repositórios",
   },
   en: {
     home: "home",
@@ -70,6 +67,7 @@ const translations = {
     demo: "demo",
     error: "Could not load projects now. Please try again in a few moments.",
     empty: "No projects found right now.",
+    repositories: "repositories",
   },
   cn: {
     home: "主页",
@@ -80,6 +78,7 @@ const translations = {
     demo: "演示",
     error: "当前无法加载项目，请稍后重试。",
     empty: "当前没有可展示的项目。",
+    repositories: "仓库",
   },
 };
 
@@ -258,6 +257,21 @@ export function ProjectsPageClient({
   hasError,
 }: ProjectsPageClientProps) {
   const [language, setLanguage] = useState<Language>("br");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const VISIBLE_CARDS = 3;
+  const maxIndex = Math.max(0, projects.length - VISIBLE_CARDS);
+
+  useLayoutEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setContainerWidth(entry.contentRect.width),
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -275,6 +289,16 @@ export function ProjectsPageClient({
 
   const t = translations[language];
   const hasProjects = useMemo(() => projects.length > 0, [projects.length]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((i) => (i + 1 > maxIndex ? 0 : i + 1));
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [maxIndex]);
+
+  const next = () => setCurrentIndex((i) => (i + 1 > maxIndex ? 0 : i + 1));
+  const prev = () => setCurrentIndex((i) => (i - 1 < 0 ? maxIndex : i - 1));
 
   return (
     <div className="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-10 md:px-24">
@@ -307,70 +331,108 @@ export function ProjectsPageClient({
         ) : null}
 
         {!hasError && hasProjects ? (
-          <ScrollArea>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              {projects.map((project) => {
-                const technologies = getProjectTechnologies(project);
+          <div className="flex flex-col items-center gap-8">
+            <div
+              ref={containerRef}
+              className="w-full max-w-3xl overflow-hidden"
+            >
+              <motion.div
+                className="flex"
+                animate={{
+                  x: containerWidth
+                    ? -(currentIndex * (containerWidth / 3))
+                    : 0,
+                }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                {projects.map((project) => {
+                  const technologies = getProjectTechnologies(project);
+                  return (
+                    <div key={project.id} className="w-1/3 flex-shrink-0 px-2">
+                      <article className="flex h-full flex-col rounded-xl border border-foreground/10 p-4">
+                        <div className="space-y-2">
+                          <h2 className="text-base font-semibold md:text-lg">
+                            {project.name}
+                          </h2>
+                          {project.description ? (
+                            <p className="line-clamp-2 text-xs text-foreground/80">
+                              {project.description}
+                            </p>
+                          ) : null}
+                        </div>
 
-                return (
-                  <article
-                    className="flex h-full flex-col justify-between rounded-xl border border-foreground/10 p-5"
-                    key={project.id}
-                  >
-                    <div className="space-y-3">
-                      <h2 className="text-lg font-semibold md:text-xl">
-                        {project.name}
-                      </h2>
-                      {project.description ? (
-                        <p className="text-sm text-foreground/80">
-                          {project.description}
-                        </p>
-                      ) : null}
-                    </div>
+                        <div className="mt-4 flex items-center justify-between gap-2">
+                          <div className="flex flex-wrap items-center gap-2 text-xs text-foreground/75">
+                            {technologies.map((technology) => (
+                              <span
+                                key={`${project.id}-${technology.key}`}
+                                title={technology.label}
+                              >
+                                <span
+                                  className={`inline-flex items-center ${technology.colorClassName}`}
+                                >
+                                  {technology.icon}
+                                </span>
+                              </span>
+                            ))}
+                          </div>
 
-                    <div className="mt-6 flex items-center justify-between gap-4">
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-foreground/75">
-                        {technologies.map((technology) => (
-                          <span
-                            key={`${project.id}-${technology.key}`}
-                            title={technology.label}
-                          >
-                            <span
-                              className={`inline-flex items-center ${technology.colorClassName}`}
+                          <div className="flex items-center gap-4 text-sm">
+                            <a
+                              className="underline hover:opacity-70"
+                              href={project.repositoryUrl}
+                              rel="noopener noreferrer"
+                              target="_blank"
                             >
-                              {technology.icon}
-                            </span>
-                          </span>
-                        ))}
-                      </div>
+                              {t.repository}
+                            </a>
 
-                      <div className="flex items-center gap-4 text-sm">
-                        <a
-                          className="underline hover:opacity-70"
-                          href={project.repositoryUrl}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {t.repository}
-                        </a>
-
-                        {project.demoUrl ? (
-                          <a
-                            className="underline hover:opacity-70"
-                            href={project.demoUrl}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                          >
-                            {t.demo}
-                          </a>
-                        ) : null}
-                      </div>
+                            {project.demoUrl ? (
+                              <a
+                                className="underline hover:opacity-70"
+                                href={project.demoUrl}
+                                rel="noopener noreferrer"
+                                target="_blank"
+                              >
+                                {t.demo}
+                              </a>
+                            ) : null}
+                          </div>
+                        </div>
+                      </article>
                     </div>
-                  </article>
-                );
-              })}
+                  );
+                })}
+              </motion.div>
             </div>
-          </ScrollArea>
+
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-xs text-foreground/50">
+                {projects.length} {t.repositories}
+              </span>
+              <div className="flex items-center gap-6">
+                <button
+                  type="button"
+                  className="hover:opacity-50 hover:cursor-pointer"
+                  onClick={prev}
+                >
+                  <FaChevronLeft size={14} />
+                </button>
+
+                <span className="text-xs text-foreground/60">
+                  {currentIndex + 1} / {maxIndex + 1}
+                </span>
+
+                <button
+                  type="button"
+                  className="hover:opacity-50 hover:cursor-pointer"
+                  onClick={next}
+                >
+                  <FaChevronRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
         ) : null}
       </div>
     </div>

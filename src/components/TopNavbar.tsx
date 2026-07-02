@@ -70,14 +70,14 @@ export function TopNavbar({
     <div className="mb-5 flex w-full items-center gap-2 sm:flex-row sm:gap-0">
       <nav className="flex items-center gap-2" aria-label="Primary">
         <Link
-          className={`text-xs hover:opacity-50 ${activePage === "home" ? "opacity-100" : "opacity-60"}`}
+          className={`text-sm hover:opacity-50 ${activePage === "home" ? "opacity-100" : "opacity-60"}`}
           href="/"
         >
           /{homeLabel}
         </Link>
 
         <Link
-          className={`text-xs hover:opacity-50 ${activePage === "projects" ? "opacity-100" : "opacity-60"}`}
+          className={`text-sm hover:opacity-50 ${activePage === "projects" ? "opacity-100" : "opacity-60"}`}
           href="/projects"
         >
           /{projectsLabel}
