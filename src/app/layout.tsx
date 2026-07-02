@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code, Forum, Geist, Geist_Mono } from "next/font/google";
+import { Fira_Code, Geist, Geist_Mono, IBM_Plex_Sans } from "next/font/google";
 import Script from "next/script";
 import { THEME_STORAGE_KEY, ThemeProvider } from "@/components/ThemeProvider";
 import "./globals.css";
@@ -14,9 +14,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const forum = Forum({
-  weight: "400",
+const ibmPlexSans = IBM_Plex_Sans({
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
+  variable: "--font-ibm-plex-sans",
 });
 
 const firaCode = Fira_Code({
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
   title: "yurirxmos portfolio.",
   description:
     "welcome to my personal portfolio website, talking about me personally and professionally.",
+  icons: "/brand.png",
 };
 
 const themeScript = `(() => {
@@ -52,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${forum.className} ${firaCode.className} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ibmPlexSans.className} ${firaCode.className} flex min-h-screen flex-col antialiased`}
       >
         <Script id="theme-script" strategy="beforeInteractive">
           {themeScript}
@@ -62,7 +64,9 @@ export default function RootLayout({
           data-website-id="2e2ef658-5aa9-4210-8270-53e9414bbea5"
           strategy="afterInteractive"
         />
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <main className="flex-1">{children}</main>
+        </ThemeProvider>
       </body>
     </html>
   );

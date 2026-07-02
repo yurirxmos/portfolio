@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { type ReactNode, useEffect, useRef, useState } from "react";
-import { GiBrazilFlag, GiSharpShuriken } from "react-icons/gi";
+import { FaChartSimple } from "react-icons/fa6";
+import { GiBrazilFlag } from "react-icons/gi";
 import { LiaFlagUsaSolid } from "react-icons/lia";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 import { RiArrowDownSLine, RiEmphasisCn } from "react-icons/ri";
@@ -37,13 +38,8 @@ export function TopNavbar({
   onLanguageChange,
 }: TopNavbarProps) {
   const { theme, toggleTheme } = useTheme();
-  const [isNavHovered, setIsNavHovered] = useState(false);
-  const [shurikenRotation, setShurikenRotation] = useState(0);
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement | null>(null);
-  const shurikenVelocityRef = useRef(0);
-  const animationFrameRef = useRef<number | null>(null);
-  const lastTimestampRef = useRef<number | null>(null);
   const currentLanguage = languageOptions.find(
     (languageOption) => languageOption.value === language,
   );
@@ -66,49 +62,13 @@ export function TopNavbar({
     };
   }, []);
 
-  useEffect(() => {
-    const animate = (timestamp: number) => {
-      const lastTimestamp = lastTimestampRef.current ?? timestamp;
-      const delta = Math.min((timestamp - lastTimestamp) / 1000, 0.032);
-      const targetVelocity = isNavHovered ? 740 : 0;
-      const acceleration = isNavHovered ? 10 : 2;
-
-      shurikenVelocityRef.current +=
-        (targetVelocity - shurikenVelocityRef.current) * acceleration * delta;
-
-      setShurikenRotation((currentRotation) => {
-        return currentRotation + shurikenVelocityRef.current * delta;
-      });
-
-      lastTimestampRef.current = timestamp;
-      animationFrameRef.current = window.requestAnimationFrame(animate);
-    };
-
-    animationFrameRef.current = window.requestAnimationFrame(animate);
-
-    return () => {
-      if (animationFrameRef.current !== null) {
-        window.cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [isNavHovered]);
-
   if (!currentLanguage) {
     return null;
   }
 
   return (
-    <div className="mb-5 flex w-full items-center justify-between gap-2 sm:flex-row sm:gap-0">
-      <nav
-        className="group flex items-center gap-2"
-        aria-label="Primary"
-        onMouseEnter={() => setIsNavHovered(true)}
-        onMouseLeave={() => setIsNavHovered(false)}
-      >
-        <GiSharpShuriken
-          style={{ transform: `rotate(${shurikenRotation}deg)` }}
-        />
-
+    <div className="mb-5 flex w-full items-center gap-2 sm:flex-row sm:gap-0">
+      <nav className="flex items-center gap-2" aria-label="Primary">
         <Link
           className={`text-xs hover:opacity-50 ${activePage === "home" ? "opacity-100" : "opacity-60"}`}
           href="/"
@@ -124,6 +84,18 @@ export function TopNavbar({
         </Link>
       </nav>
 
+      <div className="flex flex-1 justify-center">
+        <a
+          href="https://cloud.umami.is/analytics/us/share/Rq0qOXd9I1lauUgi"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Open analytics dashboard"
+          className="text-foreground/20 transition hover:text-foreground/80 hover:cursor-pointer"
+        >
+          <FaChartSimple size={12} />
+        </a>
+      </div>
+
       <div className="flex flex-row items-center gap-4">
         <button
           type="button"
@@ -134,9 +106,9 @@ export function TopNavbar({
           }}
         >
           {theme === "dark" ? (
-            <MdLightMode size={18} />
+            <MdLightMode size={15} />
           ) : (
-            <MdDarkMode size={18} />
+            <MdDarkMode size={15} />
           )}
         </button>
 
