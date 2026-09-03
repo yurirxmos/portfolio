@@ -1,16 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  type ReactNode,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
-import { FaChevronLeft, FaChevronRight, FaJava } from "react-icons/fa6";
-import { FiCode } from "react-icons/fi";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { FaJava } from "react-icons/fa6";
+import { FiCode, FiDownload, FiStar } from "react-icons/fi";
 import {
   SiCss3,
   SiExpo,
@@ -19,6 +12,7 @@ import {
   SiNextdotjs,
   SiNodedotjs,
   SiReact,
+  SiSwift,
   SiTailwindcss,
   SiTypescript,
   SiVuedotjs,
@@ -44,13 +38,28 @@ interface TechnologyIconInfo {
   colorClassName: string;
 }
 
+interface ProjectBadge {
+  key: string;
+  label: string;
+  icon?: ReactNode;
+}
+
+const PROJECT_BADGES: Record<string, ProjectBadge[]> = {
+  metria: [
+    { key: "open-source", label: "open-source" },
+    {
+      key: "downloads",
+      label: "+150",
+      icon: <FiDownload size={11} />,
+    },
+  ],
+};
+
 const translations = {
   br: {
     home: "home",
     projects: "projetos",
     title: "projetos",
-    subtitle:
-      "Lista de projetos publicados no meu GitHub, atualizada automaticamente.",
     repository: "github",
     demo: "demo",
     error:
@@ -62,7 +71,6 @@ const translations = {
     home: "home",
     projects: "projects",
     title: "projects",
-    subtitle: "Public projects from my GitHub profile, updated automatically.",
     repository: "github",
     demo: "demo",
     error: "Could not load projects now. Please try again in a few moments.",
@@ -73,28 +81,12 @@ const translations = {
     home: "主页",
     projects: "项目",
     title: "项目",
-    subtitle: "来自我 GitHub 的公开项目列表，自动更新。",
     repository: "github",
     demo: "演示",
     error: "当前无法加载项目，请稍后重试。",
     empty: "当前没有可展示的项目。",
     repositories: "仓库",
   },
-};
-
-const REPOSITORY_TECH_HINTS: Record<string, string[]> = {
-  "opencode-refactor-agent": ["typescript", "node", "react"],
-  "opencode-ship-cmd": ["typescript", "node"],
-  "freeqrcode-generator": ["javascript", "html", "css"],
-  gitrats: ["typescript", "react", "next"],
-  portfolio: ["typescript", "react", "next", "tailwind"],
-  rxmosdev: ["typescript", "react", "next"],
-  "qrcode-tester": ["typescript", "react", "expo"],
-  "frontend-mmr-calculator": ["javascript", "react"],
-  "repo-contaslol": ["javascript", "html", "css"],
-  "4get-list": ["javascript", "html", "css"],
-  "github-card": ["javascript", "html", "css"],
-  "caplol-site": ["html", "css", "javascript"],
 };
 
 const getTechnologyIconInfo = (technology: string): TechnologyIconInfo => {
@@ -142,6 +134,15 @@ const getTechnologyIconInfo = (technology: string): TechnologyIconInfo => {
       icon: <SiVuedotjs size={14} />,
       label: "Vue",
       colorClassName: "text-[#42B883]",
+    };
+  }
+
+  if (normalizedTechnology === "swift") {
+    return {
+      key: "swift",
+      icon: <SiSwift size={14} />,
+      label: "Swift",
+      colorClassName: "text-[#F05138]",
     };
   }
 
@@ -207,71 +208,11 @@ const getTechnologyIconInfo = (technology: string): TechnologyIconInfo => {
   };
 };
 
-const getProjectTechnologies = (project: Project): TechnologyIconInfo[] => {
-  const technologies = new Set<string>();
-
-  if (project.language) {
-    technologies.add(project.language.toLowerCase());
-  }
-
-  const hints = REPOSITORY_TECH_HINTS[project.name] ?? [];
-  for (const hint of hints) {
-    technologies.add(hint);
-  }
-
-  const description =
-    `${project.name} ${project.description ?? ""}`.toLowerCase();
-
-  if (description.includes("react")) {
-    technologies.add("react");
-  }
-
-  if (description.includes("next")) {
-    technologies.add("next");
-  }
-
-  if (description.includes("tailwind")) {
-    technologies.add("tailwind");
-  }
-
-  if (description.includes("node")) {
-    technologies.add("node");
-  }
-
-  if (description.includes("expo") || description.includes("react native")) {
-    technologies.add("expo");
-    technologies.add("react");
-  }
-
-  if (technologies.size === 0) {
-    return [getTechnologyIconInfo("")];
-  }
-
-  return Array.from(technologies).map((technology) =>
-    getTechnologyIconInfo(technology),
-  );
-};
-
 export function ProjectsPageClient({
   projects,
   hasError,
 }: ProjectsPageClientProps) {
   const [language, setLanguage] = useState<Language>("br");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(0);
-  const VISIBLE_CARDS = 3;
-  const maxIndex = Math.max(0, projects.length - VISIBLE_CARDS);
-
-  useLayoutEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver(([entry]) =>
-      setContainerWidth(entry.contentRect.width),
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -290,19 +231,9 @@ export function ProjectsPageClient({
   const t = translations[language];
   const hasProjects = useMemo(() => projects.length > 0, [projects.length]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((i) => (i + 1 > maxIndex ? 0 : i + 1));
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [maxIndex]);
-
-  const next = () => setCurrentIndex((i) => (i + 1 > maxIndex ? 0 : i + 1));
-  const prev = () => setCurrentIndex((i) => (i - 1 < 0 ? maxIndex : i - 1));
-
   return (
-    <div className="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-10 md:px-24">
-      <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto flex h-screen max-w-4xl flex-col px-6 py-10 md:px-24">
+      <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col overflow-hidden">
         <TopNavbar
           activePage="projects"
           homeLabel={t.home}
@@ -311,128 +242,115 @@ export function ProjectsPageClient({
           projectsLabel={t.projects}
         />
 
-        <div className="mb-10 flex flex-col gap-3">
+        <div className="mb-2 flex shrink-0 items-end justify-between gap-4 border-b border-foreground/10 pb-5">
           <h1 className="text-3xl font-semibold md:text-4xl">{t.title}</h1>
-          <p className="max-w-2xl text-sm text-foreground/80 md:text-base">
-            {t.subtitle}
-          </p>
+          {!hasError && hasProjects ? (
+            <span className="whitespace-nowrap text-xs text-foreground/40 md:text-sm">
+              {projects.length} {t.repositories}
+            </span>
+          ) : null}
         </div>
 
         {hasError ? (
-          <p className="mt-3 max-w-2xl text-sm text-foreground/80 md:text-base">
+          <p className="pt-8 text-sm text-foreground/80 md:text-base">
             {t.error}
           </p>
         ) : null}
 
         {!hasError && !hasProjects ? (
-          <p className="mt-3 max-w-2xl text-sm text-foreground/80 md:text-base">
+          <p className="pt-8 text-sm text-foreground/80 md:text-base">
             {t.empty}
           </p>
         ) : null}
 
         {!hasError && hasProjects ? (
-          <div className="flex flex-col items-center gap-8">
-            <div
-              ref={containerRef}
-              className="w-full max-w-3xl overflow-hidden"
-            >
-              <motion.div
-                className="flex"
-                animate={{
-                  x: containerWidth
-                    ? -(currentIndex * (containerWidth / 3))
-                    : 0,
-                }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                {projects.map((project) => {
-                  const technologies = getProjectTechnologies(project);
-                  return (
-                    <div key={project.id} className="w-1/3 flex-shrink-0 px-2">
-                      <article className="flex h-full flex-col rounded-xl border border-foreground/10 p-4">
-                        <div className="space-y-2">
-                          <h2 className="text-base font-semibold md:text-lg">
-                            {project.name}
-                          </h2>
-                          {project.description ? (
-                            <p className="line-clamp-2 text-xs text-foreground/80">
-                              {project.description}
-                            </p>
-                          ) : null}
-                        </div>
+          <motion.div
+            className="no-scrollbar flex-1 divide-y divide-foreground/10 overflow-y-auto"
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
+          >
+            {projects.map((project, index) => {
+              const technology = getTechnologyIconInfo(project.language);
+              const badges = PROJECT_BADGES[project.name] ?? [];
+              return (
+                <motion.article
+                  key={project.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 12 },
+                    visible: { opacity: 1, y: 0 },
+                  }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  className="group flex flex-col gap-3 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+                >
+                  <div className="flex items-baseline gap-4">
+                    <span className="w-6 shrink-0 text-xs text-foreground/30 tabular-nums">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex flex-wrap items-center gap-3 transition-transform duration-300 group-hover:translate-x-1">
+                      <h2 className="text-lg font-semibold md:text-xl">
+                        {project.name}
+                      </h2>
 
-                        <div className="mt-4 flex items-center justify-between gap-2">
-                          <div className="flex flex-wrap items-center gap-2 text-xs text-foreground/75">
-                            {technologies.map((technology) => (
-                              <span
-                                key={`${project.id}-${technology.key}`}
-                                title={technology.label}
-                              >
-                                <span
-                                  className={`inline-flex items-center ${technology.colorClassName}`}
-                                >
-                                  {technology.icon}
-                                </span>
-                              </span>
-                            ))}
-                          </div>
-
-                          <div className="flex items-center gap-4 text-sm">
-                            <a
-                              className="underline hover:opacity-70"
-                              href={project.repositoryUrl}
-                              rel="noopener noreferrer"
-                              target="_blank"
+                      {badges.length > 0 ? (
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          {badges.map((badge) => (
+                            <span
+                              key={`${project.id}-${badge.key}`}
+                              className="inline-flex items-center gap-1 rounded-full bg-foreground/40 text-background  px-2 py-0.5 text-[10px]"
                             >
-                              {t.repository}
-                            </a>
-
-                            {project.demoUrl ? (
-                              <a
-                                className="underline hover:opacity-70"
-                                href={project.demoUrl}
-                                rel="noopener noreferrer"
-                                target="_blank"
-                              >
-                                {t.demo}
-                              </a>
-                            ) : null}
-                          </div>
+                              {badge.icon}
+                              {badge.label}
+                            </span>
+                          ))}
                         </div>
-                      </article>
+                      ) : null}
                     </div>
-                  );
-                })}
-              </motion.div>
-            </div>
+                  </div>
 
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-xs text-foreground/50">
-                {projects.length} {t.repositories}
-              </span>
-              <div className="flex items-center gap-6">
-                <button
-                  type="button"
-                  className="hover:opacity-50 hover:cursor-pointer"
-                  onClick={prev}
-                >
-                  <FaChevronLeft size={14} />
-                </button>
+                  <div className="flex items-center gap-5 pl-10 sm:pl-0">
+                    {project.stars > 0 ? (
+                      <div className="flex items-center gap-1.5 text-foreground/50">
+                        <FiStar size={13} />
+                        <span className="text-sm tabular-nums">
+                          {project.stars}
+                        </span>
+                      </div>
+                    ) : null}
 
-                <span className="text-xs text-foreground/60">
-                  {currentIndex + 1} / {maxIndex + 1}
-                </span>
+                    <span
+                      title={technology.label}
+                      className={`inline-flex items-center ${technology.colorClassName}`}
+                    >
+                      {technology.icon}
+                    </span>
 
-                <button
-                  type="button"
-                  className="hover:opacity-50 hover:cursor-pointer"
-                  onClick={next}
-                >
-                  <FaChevronRight size={14} />
-                </button>
-              </div>
-            </div>
-          </div>
+                    <div className="flex items-center gap-4 text-sm text-foreground/40 transition-colors duration-300 group-hover:text-foreground/90">
+                      <a
+                        className="underline-offset-4 hover:underline"
+                        href={project.repositoryUrl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {t.repository}
+                      </a>
+
+                      {project.demoUrl ? (
+                        <a
+                          className="underline-offset-4 hover:underline"
+                          href={project.demoUrl}
+                          rel="noopener noreferrer"
+                          target="_blank"
+                        >
+                          {t.demo}
+                        </a>
+                      ) : null}
+                    </div>
+                  </div>
+                </motion.article>
+              );
+            })}
+          </motion.div>
         ) : null}
       </div>
     </div>

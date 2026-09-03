@@ -43,6 +43,15 @@ body {
   color: var(--foreground);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 h1,
 h2,
 h3,

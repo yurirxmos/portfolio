@@ -27,6 +27,13 @@ const mapRepositoriesToProjects = (
         repository.name !== "portfolio",
     )
     .sort((firstRepository, secondRepository) => {
+      const starsDifference =
+        secondRepository.stargazers_count - firstRepository.stargazers_count;
+
+      if (starsDifference !== 0) {
+        return starsDifference;
+      }
+
       const createdAtDifference =
         getTimestamp(secondRepository.created_at) -
         getTimestamp(firstRepository.created_at);
