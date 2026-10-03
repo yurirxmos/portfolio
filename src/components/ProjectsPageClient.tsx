@@ -59,6 +59,7 @@ const translations = {
   br: {
     home: "home",
     projects: "projetos",
+    apps: "apps",
     title: "projetos",
     repository: "github",
     demo: "demo",
@@ -70,6 +71,7 @@ const translations = {
   en: {
     home: "home",
     projects: "projects",
+    apps: "apps",
     title: "projects",
     repository: "github",
     demo: "demo",
@@ -80,6 +82,7 @@ const translations = {
   cn: {
     home: "主页",
     projects: "项目",
+    apps: "应用",
     title: "项目",
     repository: "github",
     demo: "演示",
@@ -240,6 +243,7 @@ export function ProjectsPageClient({
           language={language}
           onLanguageChange={setLanguage}
           projectsLabel={t.projects}
+          appsLabel={t.apps}
         />
 
         <div className="mb-2 flex shrink-0 items-end justify-between gap-4 border-b border-foreground/10 pb-5">

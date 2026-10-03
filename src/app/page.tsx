@@ -28,6 +28,7 @@ const translations = {
     footer5: "Se tiver interesse em me conhecer mais me mande um e-mail :)",
     or: "ou",
     projects: "projetos",
+    apps: "apps",
     home: "home",
   },
   en: {
@@ -49,6 +50,7 @@ const translations = {
       "If you're interested in getting to know me better, send me an email :)",
     or: "or",
     projects: "projects",
+    apps: "apps",
     home: "home",
   },
   cn: {
@@ -68,6 +70,7 @@ const translations = {
     footer5: "如果您有兴趣更好地了解我，请给我发邮件 :)",
     or: "或",
     projects: "项目",
+    apps: "应用",
     home: "主页",
   },
 };
@@ -163,6 +166,7 @@ export default function Home() {
           language={language}
           onLanguageChange={setLanguage}
           projectsLabel={t.projects}
+          appsLabel={t.apps}
         />
 
         <div className="mb-5">

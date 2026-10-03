@@ -14,7 +14,8 @@ interface TopNavbarProps {
   language: Language;
   homeLabel: string;
   projectsLabel: string;
-  activePage: "home" | "projects";
+  appsLabel: string;
+  activePage: "home" | "projects" | "apps";
   onLanguageChange: (language: Language) => void;
 }
 
@@ -34,6 +35,7 @@ export function TopNavbar({
   language,
   homeLabel,
   projectsLabel,
+  appsLabel,
   activePage,
   onLanguageChange,
 }: TopNavbarProps) {
@@ -81,6 +83,13 @@ export function TopNavbar({
           href="/projects"
         >
           /{projectsLabel}
+        </Link>
+
+        <Link
+          className={`text-sm hover:opacity-50 ${activePage === "apps" ? "opacity-100" : "opacity-60"}`}
+          href="/apps"
+        >
+          /{appsLabel}
         </Link>
       </nav>
 
