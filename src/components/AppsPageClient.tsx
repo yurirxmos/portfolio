@@ -109,14 +109,9 @@ export function AppsPageClient() {
   return (
     <div className="mx-auto flex h-screen max-w-4xl flex-col px-6 py-10 md:px-24">
       <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col overflow-hidden">
-        <TopNavbar
-          activePage="apps"
-          homeLabel={t.home}
-          language={language}
-          onLanguageChange={setLanguage}
-          projectsLabel={t.projects}
-          appsLabel={t.apps}
-        />
+        <div className="mb-5">
+          <TopNavbar language={language} onLanguageChange={setLanguage} />
+        </div>
 
         <div className="mb-2 flex shrink-0 items-end justify-between gap-4 border-b border-foreground/10 pb-5">
           <h1 className="text-3xl font-semibold md:text-4xl">{t.title}</h1>
