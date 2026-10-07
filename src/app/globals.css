@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
+/* the theme toggle sets a .dark class on <html>, so dark: follows it */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
+  --background: #f3f3f1;
+  --card: #ffffff;
   --foreground: #171717;
   --expo-in: linear(
     0 0%,
@@ -25,6 +29,7 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-card: var(--card);
   --color-foreground: var(--foreground);
 }
 
@@ -34,6 +39,7 @@ html {
 
 html.dark {
   --background: #0a0a0a;
+  --card: #141414;
   --foreground: #ededed;
   color-scheme: dark;
 }
@@ -41,6 +47,43 @@ html.dark {
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* dotted background: fixed grid of dots that fades out toward the edges */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--foreground) 22%, transparent) 1px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+  mask-image: radial-gradient(
+    ellipse 90% 80% at 50% 40%,
+    #000 30%,
+    transparent 100%
+  );
+  animation: dots-drift 60s linear infinite;
+}
+
+@keyframes dots-drift {
+  to {
+    background-position: 22px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+a[href],
+button:not(:disabled) {
+  cursor: pointer;
 }
 
 .no-scrollbar {

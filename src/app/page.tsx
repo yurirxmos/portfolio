@@ -1,6 +1,12 @@
 "use client";
 
+import { motion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useState } from "react";
+import { FaGithub, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
+import { FiCheck, FiMail } from "react-icons/fi";
+import { ProjectsPageClient } from "@/components/ProjectsPageClient";
+import { ReactionGame } from "@/components/ReactionGame";
 import { TopNavbar } from "@/components/TopNavbar";
 import {
   detectLanguageFromBrowser,
@@ -11,69 +17,53 @@ import {
 
 const translations = {
   br: {
+    role: "Engenheiro de software",
     description1:
       "Sou engenheiro de software, com {years} anos de experiência. Atuei em projetos voltados para o setor agronômico, onde aprendi a aplicar tecnologias para otimização de processos e implantação de soluções com inteligência artificial.",
-    description2:
-      "Minha rotina profissional gira em torno de tornar a tecnologia acessível e intuitiva, o que explica minha paixão pelo desenvolvimento front-end — acredito que a internet precisa de mais vida, arte e experiências envolventes que sejam agradáveis durante o uso cotidiano dos usuários. Sou marido, futuro pai e um grande fã de jogos — inclusive, enquanto escrevo isto, estou ouvindo a trilha sonora de Cyberpunk 2077.",
-    description3:
-      "Neste ano, já realizei {contributions} contribuições no GitHub, sempre buscando evoluir como desenvolvedor e criar soluções que realmente façam diferença.",
-    footer1: "Você pode checar minhas",
-    experiences: "experiências profissionais",
-    footer2: "no meu",
-    and: "e se quiser ver",
-    myCode: "meu código",
-    footer3: "fique a vontade pra acessar meu",
-    footer4:
-      "Caso queira conhecer mais do Yuri como pessoa você pode também me seguir no",
-    footer5: "Se tiver interesse em me conhecer mais me mande um e-mail :)",
-    or: "ou",
-    projects: "projetos",
-    apps: "apps",
-    home: "home",
+    contributions: "{contributions} contribuições no GitHub este ano",
+    contact: "Quer me conhecer melhor? Me mande um e-mail :)",
+    sendEmail: "Enviar e-mail",
+    copied: "E-mail copiado!",
   },
   en: {
+    role: "Software engineer",
     description1:
       "I'm a software engineer with {years} years of experience. I've worked on projects focused on the agricultural sector, where I learned to apply technologies for process optimization and implementation of artificial intelligence solutions.",
-    description2:
-      "My professional routine revolves around making technology accessible and intuitive, which explains my passion for front-end development — I believe the internet needs more life, art, and engaging experiences that are enjoyable during users' daily use. I'm a husband, soon-to-be father, and a huge gaming fan — in fact, as I write this, I'm listening to the Cyberpunk 2077 soundtrack.",
-    description3:
-      "This year, I've already made {contributions} contributions on GitHub, always seeking to evolve as a developer and create solutions that really make a difference.",
-    footer1: "You can check my",
-    experiences: "professional experiences",
-    footer2: "on my",
-    and: "and if you want to see",
-    myCode: "my code",
-    footer3: "feel free to access my",
-    footer4:
-      "If you want to know more about Yuri as a person, you can also follow me on",
-    footer5:
-      "If you're interested in getting to know me better, send me an email :)",
-    or: "or",
-    projects: "projects",
-    apps: "apps",
-    home: "home",
+    contributions: "{contributions} GitHub contributions this year",
+    contact: "Want to get to know me better? Send me an email :)",
+    sendEmail: "Send e-mail",
+    copied: "E-mail copied!",
   },
   cn: {
+    role: "软件工程师",
     description1:
       "我是一名软件工程师，有{years}年的经验。我曾在农业部门的项目中工作，在那里我学会了应用技术来优化流程并实施人工智能解决方案。",
-    description2:
-      "我的职业日常围绕着使技术变得易于访问和直观，这解释了我对前端开发的热情——我相信互联网需要更多的生命、艺术和引人入胜的体验，这些体验在用户日常使用中令人愉快。我是丈夫、即将成为父亲，并是一个狂热的游戏粉丝——事实上，在写这篇文章时，我正在听赛博朋克2077的原声带。",
-    description3:
-      "今年，我已经在GitHub上做出了{contributions}次贡献，一直寻求作为开发者的成长，并创建真正有影响力的解决方案。",
-    footer1: "您可以查看我的",
-    experiences: "专业经验",
-    footer2: "在我的",
-    and: "并且如果您想查看",
-    myCode: "我的代码",
-    footer3: "随意访问我的",
-    footer4: "如果您想更多地了解作为人的Yuri，您也可以在",
-    footer5: "如果您有兴趣更好地了解我，请给我发邮件 :)",
-    or: "或",
-    projects: "项目",
-    apps: "应用",
-    home: "主页",
+    contributions: "今年在GitHub上有{contributions}次贡献",
+    contact: "想更了解我？给我发邮件 :)",
+    sendEmail: "发送邮件",
+    copied: "邮箱已复制！",
   },
 };
+
+const CONTACT_EMAIL = "yuri@rxmos.dev.br";
+
+const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/yurirxmos/",
+    icon: FaLinkedinIn,
+  },
+  { label: "GitHub", href: "https://github.com/yurirxmos", icon: FaGithub },
+  { label: "X", href: "https://twitter.com/rxmosdev", icon: FaXTwitter },
+  { label: "Email", href: "mailto:yuriramos2406@gmail.com", icon: FiMail },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const fadeUpTransition = { duration: 0.5, ease: "easeOut" } as const;
 
 export default function Home() {
   const calculateExperienceYears = () => {
@@ -87,6 +77,7 @@ export default function Home() {
   const [contributions, setContributions] = useState(0);
   const [loading, setLoading] = useState(true);
   const [language, setLanguage] = useState<Language>("br");
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     const savedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -150,6 +141,16 @@ export default function Home() {
 
   const t = translations[language];
 
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT_EMAIL);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const replaceTemplate = (
     text: string,
     values: Record<string, string | number>,
@@ -158,71 +159,117 @@ export default function Home() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-4xl items-center px-6 py-10 md:px-24">
-      <div className="mx-auto w-full max-w-5xl text-left text-md">
-        <TopNavbar
-          activePage="home"
-          homeLabel={t.home}
-          language={language}
-          onLanguageChange={setLanguage}
-          projectsLabel={t.projects}
-          appsLabel={t.apps}
-        />
+    <div className="mx-auto min-h-screen max-w-6xl lg:flex lg:gap-10 lg:px-10">
+      <motion.aside
+        className="m-6 flex flex-col gap-4 lg:sticky lg:top-6 lg:m-0 lg:my-6 lg:w-80 lg:shrink-0 lg:self-start"
+        initial="hidden"
+        animate="visible"
+        variants={{ visible: { transition: { staggerChildren: 0.08 } } }}
+      >
+        <motion.div
+          variants={fadeUp}
+          transition={fadeUpTransition}
+          className="rounded-none rounded-tl-2xl rounded-br-2xl border border-foreground/10 bg-card px-5 py-3"
+        >
+          <TopNavbar language={language} onLanguageChange={setLanguage} />
+        </motion.div>
 
-        <div className="mb-5">
-          <h1 className="text-3xl font-semibold md:text-4xl">Yuri Ramos</h1>
+        <div className="flex flex-col gap-5 rounded-none rounded-tl-2xl rounded-br-2xl border border-foreground/10 bg-card p-6">
+          <motion.div
+            variants={fadeUp}
+            transition={fadeUpTransition}
+            className="flex flex-col items-start gap-3"
+          >
+            <motion.div
+              whileHover={{ rotate: -6, scale: 1.08 }}
+              transition={{ type: "spring", stiffness: 300, damping: 15 }}
+            >
+              <Image
+                src="/brand.png"
+                alt="Yuri Ramos"
+                width={72}
+                height={72}
+                className="size-[72px] rounded-full object-cover dark:invert"
+                priority
+              />
+            </motion.div>
+            <div>
+              <h1 className="text-2xl font-semibold leading-tight">
+                Yuri Ramos
+              </h1>
+              <p className="text-sm text-foreground/50">
+                @yurirxmos · {t.role}
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            transition={fadeUpTransition}
+            className="flex flex-col gap-2 text-sm leading-relaxed text-foreground/80"
+          >
+            <span className="font-mono text-[11px] uppercase tracking-widest text-foreground/40">
+              {"// about"}
+            </span>
+            <p>{replaceTemplate(t.description1, { years: String(years) })}</p>
+          </motion.div>
+
+          <motion.div
+            variants={fadeUp}
+            transition={fadeUpTransition}
+            className="flex items-center gap-2"
+          >
+            {socialLinks.map(({ label, href, icon: Icon }) => (
+              <motion.a
+                key={label}
+                href={href}
+                aria-label={label}
+                title={label}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.92 }}
+                className="flex size-9 items-center justify-center rounded-lg border border-foreground/10 bg-background text-foreground/60 transition-colors hover:border-foreground/30 hover:text-foreground"
+              >
+                <Icon size={15} />
+              </motion.a>
+            ))}
+          </motion.div>
+
+          <motion.p
+            variants={fadeUp}
+            transition={fadeUpTransition}
+            className="font-mono text-[11px] text-foreground/40"
+          >
+            {"> "}
+            {replaceTemplate(t.contributions, {
+              contributions: loading ? "...." : String(contributions),
+            })}
+          </motion.p>
         </div>
 
-        <p className="text-md mb-5 text-justify ">
-          {replaceTemplate(t.description1, { years: String(years) })}
-          <br></br>
-          <br></br>
-          {t.description2}
-          <br></br>
-          <br></br>
-          {replaceTemplate(t.description3, {
-            contributions: loading ? "...." : String(contributions),
-          })}
-          {t.footer1} <b>{t.experiences}</b> {t.footer2}{" "}
-          <a
-            href="https://www.linkedin.com/in/yurirxmos/"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="underline"
+        <motion.div
+          variants={fadeUp}
+          transition={fadeUpTransition}
+          className="rounded-none rounded-tl-2xl rounded-br-2xl border border-foreground/10 bg-card p-5 text-sm"
+        >
+          <p className="text-foreground/60">{t.contact}</p>
+          <button
+            type="button"
+            onClick={copyEmail}
+            className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-foreground px-3.5 py-2 text-xs font-medium text-background transition-opacity hover:opacity-80"
           >
-            linkedin
-          </a>
-          , {t.and} <b>{t.myCode}</b> {t.footer3}{" "}
-          <a
-            href="https://github.com/yurirxmos"
-            rel="noopener noreferrer"
-            target="_blank"
-            className="underline"
-          >
-            GitHub
-          </a>
-          . {t.footer4}{" "}
-          <a
-            href="https://twitter.com/rxmosdev"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline"
-          >
-            twitter
-          </a>
-          .<br></br>
-          <br></br>
-          {t.footer5}
-          <br></br>
-          <a href="mailto:yuriramos2406@gmail.com" className="underline">
-            yuriramos2406@gmail.com
-          </a>{" "}
-          {t.or}{" "}
-          <a href="mailto:yuri@rxmos.dev.br" className="underline">
-            yuri@rxmos.dev.br
-          </a>
-        </p>
-      </div>
+            {copied ? <FiCheck size={14} /> : <FiMail size={14} />}
+            {copied ? t.copied : t.sendEmail}
+          </button>
+        </motion.div>
+
+        <motion.div variants={fadeUp} transition={fadeUpTransition}>
+          <ReactionGame language={language} />
+        </motion.div>
+      </motion.aside>
+
+      <ProjectsPageClient language={language} />
     </div>
   );
 }

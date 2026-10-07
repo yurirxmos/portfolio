@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { FaChartSimple } from "react-icons/fa6";
 import { GiBrazilFlag } from "react-icons/gi";
@@ -12,10 +11,6 @@ import type { Language } from "@/lib/language";
 
 interface TopNavbarProps {
   language: Language;
-  homeLabel: string;
-  projectsLabel: string;
-  appsLabel: string;
-  activePage: "home" | "projects" | "apps";
   onLanguageChange: (language: Language) => void;
 }
 
@@ -31,14 +26,7 @@ const languageOptions: LanguageOption[] = [
   { value: "cn", label: "CN", icon: <RiEmphasisCn size={18} /> },
 ];
 
-export function TopNavbar({
-  language,
-  homeLabel,
-  projectsLabel,
-  appsLabel,
-  activePage,
-  onLanguageChange,
-}: TopNavbarProps) {
+export function TopNavbar({ language, onLanguageChange }: TopNavbarProps) {
   const { theme, toggleTheme } = useTheme();
   const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
   const languageMenuRef = useRef<HTMLDivElement | null>(null);
@@ -69,31 +57,8 @@ export function TopNavbar({
   }
 
   return (
-    <div className="mb-5 flex w-full items-center gap-2 sm:flex-row sm:gap-0">
-      <nav className="flex items-center gap-2" aria-label="Primary">
-        <Link
-          className={`text-sm hover:opacity-50 ${activePage === "home" ? "opacity-100" : "opacity-60"}`}
-          href="/"
-        >
-          /{homeLabel}
-        </Link>
-
-        <Link
-          className={`text-sm hover:opacity-50 ${activePage === "projects" ? "opacity-100" : "opacity-60"}`}
-          href="/projects"
-        >
-          /{projectsLabel}
-        </Link>
-
-        <Link
-          className={`text-sm hover:opacity-50 ${activePage === "apps" ? "opacity-100" : "opacity-60"}`}
-          href="/apps"
-        >
-          /{appsLabel}
-        </Link>
-      </nav>
-
-      <div className="flex flex-1 justify-center">
+    <div className="flex w-full items-center gap-2">
+      <div className="flex flex-1 items-center">
         <a
           href="https://cloud.umami.is/analytics/us/share/Rq0qOXd9I1lauUgi"
           target="_blank"

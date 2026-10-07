@@ -24,11 +24,7 @@ export const metadata: Metadata = {
 const themeScript = `(() => {
   try {
     const savedTheme = window.localStorage.getItem('${THEME_STORAGE_KEY}');
-    const theme = savedTheme === 'light' || savedTheme === 'dark'
-      ? savedTheme
-      : window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light';
+    const theme = savedTheme === 'light' ? 'light' : 'dark';
 
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.dataset.theme = theme;
@@ -41,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" data-theme="dark" suppressHydrationWarning>
       <body
         className={`${geistMono.className} ${ibmPlexSans.variable} flex min-h-screen flex-col antialiased`}
       >

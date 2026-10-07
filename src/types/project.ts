@@ -4,8 +4,6 @@ export interface GithubRepository {
   description: string | null;
   html_url: string;
   homepage: string | null;
-  language: string | null;
-  stargazers_count: number;
   created_at: string;
   updated_at: string;
   fork: boolean;
@@ -19,7 +17,5 @@ export interface Project {
   description: string | null;
   repositoryUrl: string;
   demoUrl: string | null;
-  language: string;
-  stars: number;
   updatedAt: string;
 }

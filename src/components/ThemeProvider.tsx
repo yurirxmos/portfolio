@@ -27,15 +27,11 @@ const isTheme = (value: string | null): value is Theme => {
   return value === "light" || value === "dark";
 };
 
-const getSystemTheme = (): Theme => {
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
+const DEFAULT_THEME: Theme = "dark";
 
 const getInitialTheme = (): Theme => {
   if (typeof window === "undefined") {
-    return "light";
+    return DEFAULT_THEME;
   }
 
   const rootTheme = document.documentElement.dataset.theme;
@@ -48,7 +44,7 @@ const getInitialTheme = (): Theme => {
     return savedTheme;
   }
 
-  return getSystemTheme();
+  return DEFAULT_THEME;
 };
 
 const applyTheme = (theme: Theme): void => {
