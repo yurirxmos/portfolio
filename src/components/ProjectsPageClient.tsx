@@ -24,10 +24,48 @@ interface ProjectsPageClientProps {
 }
 
 // Projects shown in the top list, with their own logo. Every other repo goes
-// into the repositories list below, using the mac-style GitHub tile.
-const FEATURED_PROJECTS: Record<string, string> = {
-  feather: "/logos/feather.png",
-  metria: "/logos/metria.png",
+// into the repositories list below, using the mac-style GitHub tile. A logo
+// with a transparent background can set one.
+const FEATURED_PROJECTS: Record<string, { src: string; background?: string }> =
+  {
+    feather: { src: "/logos/feather.png" },
+    metria: { src: "/logos/metria-mascot.png", background: "bg-black p-1" },
+  };
+
+// Short demos under a featured project's description: several sit side by
+// side; a single one spans the card, trimmed only at the bottom.
+const PROJECT_DEMOS: Record<
+  string,
+  { src: string; alt: string; width: number; height: number }[]
+> = {
+  feather: [
+    {
+      src: "/projects/feather/card-reply.gif",
+      alt: "Feather replying to a client in a team chat",
+      width: 800,
+      height: 500,
+    },
+    {
+      src: "/projects/feather/card-rewrite.gif",
+      alt: "Feather rewriting a rough email draft",
+      width: 800,
+      height: 500,
+    },
+    {
+      src: "/projects/feather/card-ask.gif",
+      alt: "Feather Plus answering a question with suggested text",
+      width: 800,
+      height: 500,
+    },
+  ],
+  metria: [
+    {
+      src: "/projects/metria/demo.gif",
+      alt: "Metria showing AI usage in the menu bar and a side panel",
+      width: 800,
+      height: 679,
+    },
+  ],
 };
 
 const translations = {
@@ -72,11 +110,11 @@ function ProjectLogo({ project }: { project: Project }) {
   if (logo) {
     return (
       <Image
-        src={logo}
+        src={logo.src}
         alt={`${project.name} logo`}
         width={56}
         height={56}
-        className="size-14 shrink-0 rounded-xl"
+        className={`size-14 shrink-0 rounded-xl object-contain ${logo.background ?? ""}`}
       />
     );
   }
@@ -312,6 +350,32 @@ export function ProjectsPageClient({ language }: ProjectsPageClientProps) {
                           >
                             {project.description}
                           </p>
+                        ) : null}
+
+                        {!isRepository &&
+                        PROJECT_DEMOS[project.name.toLowerCase()] ? (
+                          <div
+                            className={`col-span-3 grid grid-cols-1 gap-2 ${PROJECT_DEMOS[project.name.toLowerCase()].length > 1 ? "sm:grid-cols-3" : ""}`}
+                          >
+                            {PROJECT_DEMOS[project.name.toLowerCase()].map(
+                              (demo, _, demos) => (
+                                // biome-ignore lint/performance/noImgElement: animated GIFs, which next/image would not optimize anyway
+                                <img
+                                  key={demo.src}
+                                  src={demo.src}
+                                  alt={demo.alt}
+                                  width={demo.width}
+                                  height={demo.height}
+                                  loading="lazy"
+                                  className={
+                                    demos.length > 1
+                                      ? "aspect-[8/5] w-full rounded-lg border border-foreground/10 object-cover"
+                                      : "aspect-[4/3] w-full rounded-lg border border-foreground/10 object-cover object-top"
+                                  }
+                                />
+                              ),
+                            )}
+                          </div>
                         ) : null}
                       </motion.article>
                     );
